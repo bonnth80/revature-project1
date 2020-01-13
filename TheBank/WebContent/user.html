@@ -67,26 +67,16 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-         <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-         </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-         <input class="form-control mr-sm-2" type="search" placeholder="username" aria-label="Search">
-         <input class="form-control mr-sm-2" type="password" placeholder="password" aria-label="Search">
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-      </form>
-      <div class="navbar-nav">
-         <input class="btn btn-primary" type="button" value="Sign up">
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+               <a class="nav-link" href="#">My Nova<span class="sr-only">(current)</span></a>
+            </li>
+         </ul>
       </div>
-      </div>
+
+      <div class="my-2 my-lg-0">
+         <button class="btn btn-success my-2 my-sm-0" type="submit">Sign out</button>
+       </div>
    </nav>
 
    <!-- body -->
@@ -103,30 +93,34 @@
        -->
 
        <!-- Welcome and User Info box -->
-      <h2>Welcome, Thomas</h2>
-      <div class="card m-4 p-3" style="width: 24rem;">
-         <h5 class="card-title">Transfers</h5>
-         <div classw="card-body">
-         You have 4 incoming transfer requests
+
+      <div>
+         <h2 class="my-2 text-center">Welcome, Thomas</h2>
       </div>
-      <button type="button" class="btn btn-primary">View Transfers</button>
+      <div class="border border-info rounded my-2 p-3">
+         <h4>Transfers</h4>
+         You have 4 incoming transfer requests<br>
+         <button type="button" class="btn btn-primary">View Transfers</button>
       </div>
 
       <!-- Accounts List -->
-      <div class="container border border-info rounded">
+
+      <div class="border border-info rounded my-2 p-3">
+      <h4>Accounts</h4>
+      <button type="button" class="m-2 ml-auto btn btn-info">Apply For a New Account</button>
       <table class="table">
          <thead>
             <tr>
-            <th scope="col">Account #</th>
-            <th scope="col">Balance</th>
             <th scope="col">Actions</th>
+            <th scope="col">Account Number</th>
+            <th scope="col">Balance</th>
             </tr>
          </thead>
          <tbody>
             <tr>
-            <th scope="row">1</th>
-            <td>$654.12</td>
-            <td><button type="button" class="btn btn-primary">Details</button></td>
+               <td><button type="button" class="btn btn-primary">Details</button></td>
+               <td>1</th>
+               <td>$654.12</td>
             </tr>
          </tbody>
       </table>
@@ -134,11 +128,11 @@
 
        <!-- Account Details -->
 
-      <div class="container border border-info rounded my-4">
+      <div class="border border-info rounded my-2 p-3">
          <h4 class="nav-item">Account details for: 1</h4>
          <nav class="my-2">
-            <button type="button" class="btn btn-primary nav-item">Withdraw</button>
             <button type="button" class="btn btn-primary nav-item">Deposit</button>
+            <button type="button" class="btn btn-primary nav-item">Withdraw</button>
             <button type="button" class="btn btn-primary nav-item">Transfer</button>
          </nav>
          <h5>Transaction History</h5>
@@ -182,7 +176,7 @@
                   <td>$648.22</td>
                </tr>
                <tr>
-                  <td>Erikson and daughters</th>
+                  <td>ERIK'S KENTUCKY MOONSHINE</th>
                   <td style="color: green">$42.24</td>
                   <td style="color: red"></td>
                   <td>10/4/2019</td>
