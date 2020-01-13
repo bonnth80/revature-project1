@@ -917,3 +917,39 @@ Please select from these available actions:
 2020-01-12 17:54:42 INFO  BankMain:623 - 
 Goodbye.
 
+2020-01-12 19:50:27 INFO  BankMain:59 - Please make a selection:
+	1. Existing User Sign-in
+	2. New User Sign-up
+
+2020-01-12 19:50:29 INFO  BankMain:68 - Username:
+2020-01-12 19:50:31 INFO  BankMain:70 - Password: 
+2020-01-12 19:50:32 INFO  BankMain:76 - 
+Current user is: Customer
+2020-01-12 19:50:32 INFO  Menu:46 - 
+Please select from these available actions:
+2020-01-12 19:50:32 INFO  Menu:47 - 	1. Apply for a new account.
+2020-01-12 19:50:32 INFO  Menu:48 - 	2. View accounts list.
+2020-01-12 19:50:32 INFO  Menu:49 - 	3. Make a withdrawal.
+2020-01-12 19:50:32 INFO  Menu:50 - 	4. Make a deposit
+2020-01-12 19:50:32 INFO  Menu:51 - 	5. Post Money Transfer.
+2020-01-12 19:50:32 INFO  Menu:52 - 	6. View incumbent transfer requests. (2)
+2020-01-12 19:50:32 INFO  Menu:54 - 	7. Sign out.
+2020-01-12 19:50:32 INFO  Menu:55 - 	8. Exit application.
+2020-01-12 19:50:35 INFO  Menu:85 - Transfer Number     Source Account           Destination Account      Transfer Amount          Date posted              
+2020-01-12 19:50:35 INFO  Menu:86 - ------------------------------------------------------------------------------------------------------------
+2020-01-12 19:50:35 INFO  BankMain:498 - 1                   7                        8                        300.0                    2019-12-31               
+2020-01-12 19:50:35 INFO  BankMain:498 - 2                   9                        8                        100.0                    2020-01-02               
+2020-01-12 19:50:35 INFO  BankMain:498 - 3                   6                        7                        200.0                    2020-01-02               
+2020-01-12 19:50:35 INFO  BankMain:505 - Select a transfer request number.
+2020-01-12 19:50:42 INFO  BankMain:530 - You have no transfers with that transfer number. Returning to menu.
+
+2020-01-12 19:50:42 INFO  Menu:46 - 
+Please select from these available actions:
+2020-01-12 19:50:42 INFO  Menu:47 - 	1. Apply for a new account.
+2020-01-12 19:50:42 INFO  Menu:48 - 	2. View accounts list.
+2020-01-12 19:50:42 INFO  Menu:49 - 	3. Make a withdrawal.
+2020-01-12 19:50:42 INFO  Menu:50 - 	4. Make a deposit
+2020-01-12 19:50:42 INFO  Menu:51 - 	5. Post Money Transfer.
+2020-01-12 19:50:42 INFO  Menu:52 - 	6. View incumbent transfer requests. (2)
+2020-01-12 19:50:42 INFO  Menu:54 - 	7. Sign out.
+2020-01-12 19:50:42 INFO  Menu:55 - 	8. Exit application.

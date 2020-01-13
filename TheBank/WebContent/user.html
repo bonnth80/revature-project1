@@ -22,7 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
 
    <!-- local css -->
-   <link rel="stylesheet" href="style/index.css">
+   <link rel="stylesheet" href="style/user.css">
 </head>
 <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -97,15 +97,16 @@
       <div>
          <h2 class="my-2 text-center">Welcome, Thomas</h2>
       </div>
-      <div class="border border-info rounded my-2 p-3">
+      <div class="border border-info rounded my-2 usection">
          <h4>Transfers</h4>
          You have 4 incoming transfer requests<br>
-         <button type="button" class="btn btn-primary">View Transfers</button>
+         <button id="btnViewTransfers" type="button" class="btn btn-primary">View Transfers</button>
+         <button id="btnHideTransfers" type="button" class="btn btn-primary">Hide Transfers</button>
       </div>
 
       <!-- Transfers List -->
 
-      <div class="border border-info rounded my-2 p-3">
+      <div id="scTransfers" class="border border-info rounded my-2 usection">
       <h4>Incoming Transfers</h4>
       <table class="table">
          <thead>
@@ -119,16 +120,16 @@
          </thead>
          <tbody>
             <tr>
-               <td><button type="button" class="btn btn-primary">Approve</button>
-               <button type="button" class="btn btn-primary">Deny</button></td>
+               <td><button type="button" class="mx-1 btn btn-primary">Approve</button>
+               <button type="button" class="mx-1 btn btn-primary">Deny</button></td>
                <td>56</td>
                <td>1</td>
                <td>$200.00</td>
                <td>10/1/2019</td>
             </tr>
             <tr>
-               <td><button type="button" class="btn btn-primary">Approve</button>
-               <button type="button" class="btn btn-primary">Deny</button></td>
+               <td><button type="button" class="mx-1 btn btn-primary">Approve</button>
+               <button type="button" class="mx-1 btn btn-primary">Deny</button></td>
                <td>4</td>
                <td>1</td>
                <td>$125.00</td>
@@ -140,9 +141,9 @@
 
       <!-- Accounts List -->
 
-      <div class="border border-info rounded my-2 p-3">
+      <div class="border border-info rounded my-2 usection">
       <h4>Accounts</h4>
-      <button type="button" class="m-2 ml-auto btn btn-info">Apply For a New Account</button>
+      <a href="apply.html" class="m-2 ml-auto btn btn-info">Apply For a New Account</a>
       <table class="table">
          <thead>
             <tr>
@@ -163,7 +164,7 @@
 
       <!-- Account Details -->
 
-      <div class="border border-info rounded my-2 p-3">
+      <div class="border border-info rounded my-2 usection">
          <h4 class="nav-item">Account details for: 1</h4>
          <nav class="my-2">
             <button type="button" class="btn btn-primary nav-item">Deposit</button>
