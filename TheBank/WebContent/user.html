@@ -167,9 +167,29 @@
       <div id="snAccountDetails" class="border border-info rounded my-2 usection">
          <h4 class="nav-item">Account details for: 1</h4>
          <nav class="my-2">
-            <button type="button" class="btn btn-primary nav-item">Deposit</button>
-            <button type="button" class="btn btn-primary nav-item">Withdraw</button>
-            <button type="button" class="btn btn-primary nav-item">Transfer</button>
+            <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                 <button class="btn btn-primary" type="button" id="button-addon1">Deposit</button>
+                 <span class="input-group-text">$</span>
+               </div>
+               <input type="text" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+             </div>
+             <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                 <button class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
+                 <span class="input-group-text">$</span>
+               </div>
+               <input type="text" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+             </div>
+             <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                  <button class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
+                  <span class="input-group-text text-info">Amount | Destination</span>
+                  <span class="input-group-text">$</span>
+               </div>
+               <input type="text" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+               <input type="text" class="form-control" placeholder="0" aria-label="Example text with button addon" aria-describedby="button-addon1">
+             </div>
          </nav>
          <h5>Transaction History</h5>
          <table class="table">

@@ -169,24 +169,49 @@ function getAccounts() {
 populateAccounts();
 
 
-// ************* Transactions **************************
+// ************* Account Details **************************
 var snAccountDetails = document.getElementById("snAccountDetails");
+var withdrawAmount;
+var depositAmount;
+var transferAmount;
+var transferDestination;
+var currentAccount;
 
 function displayAccountTransactionHistory(accountNumber) {
-
    let transactionObject = getTransactionHistory(accountNumber);
    let transactionList = transactionObject.transactions;
    let balance = Number.parseFloat(transactionObject.currentBalance);
    let credit;
    let debit;
+   currentAccount = accountNumber;
 
    transactionList = sortTL(transactionList);
 
    let accountDetailsTable = `<h4 class="nav-item">Account details for: ${accountNumber}</h4>
    <nav class="my-2">
-      <button type="button" class="btn btn-primary nav-item">Deposit</button>
-      <button type="button" class="btn btn-primary nav-item">Withdraw</button>
-      <button type="button" class="btn btn-primary nav-item">Transfer</button>
+   <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button onclick="postDeposit(currentAccount, depositAmount)" class="btn btn-primary" type="button" id="button-addon1">Deposit</button>
+        <span class="input-group-text">$</span>
+      </div>
+      <input type="text" oninput="setDepositAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button onclick="postDeposit(currentAccount, withdrawAmount)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
+        <span class="input-group-text">$</span>
+      </div>
+      <input type="text" oninput="setWithdrawAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+         <button onclick="postTransfer(currentAccount, transferDestination, transferAmount)" class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
+         <span class="input-group-text text-info">Amount | Destination</span>
+         <span class="input-group-text">$</span>
+      </div>
+      <input type="text" oninput="setTransferAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      <input type="text" oninput="setTransferDestination(this.value)" class="form-control" placeholder="0" aria-label="Example text with button addon" aria-describedby="button-addon1">
+    </div>
    </nav>
    <h5>Transaction History</h5>
    <table class="table">
@@ -278,6 +303,47 @@ function getTransactionHistory(accountNumber) {
       ],
       currentBalance: "425.00"
    }
+}
+
+function postDeposit(accountNumber, amount) {
+   // TODO post deposit for amount
+   console.log(
+      "Posted Deposit for account: " + accountNumber
+       + " for amount: " + amount
+      );
+}
+
+function postWithdrawal(accountNumber, amount) {
+   // TODO post withdrawal for amount
+   console.log(
+      "Posted Withdrawal for account: " + accountNumber
+      + " for amount: " + amount
+      );
+}
+
+function postTransfer(sourceAccount, destinationAccount, amount) {
+   // TODO post transfer of funds
+   console.log(
+      "Posted transfer from account: " + sourceAccount +
+      " to account: " + destinationAccount +
+      " for amount: " + amount
+      );
+}
+
+function setWithdrawAmount(value) {
+   withdrawAmount = Number.parseFloat(value).toFixed(2);
+}
+
+function setDepositAmount(value) {
+   depositAmount = Number.parseFloat(value).toFixed(2);
+}
+
+function setTransferAmount(value) {
+   transferAmount = Number.parseFloat(value).toFixed(2);
+}
+
+function setTransferDestination(value) {
+   transferDestination = Number.parseInt(value);
 }
 
 function sortTL(tl) {
