@@ -34,8 +34,8 @@ function showTransfers() {
       if (element.status == 0) {
          transferTable +=
          '<tr>' +
-         '<td><button onclick="' + element.transferId + '" type="button" class="mx-1 btn btn-primary">Approve</button>' +
-         '<button type="button" class="mx-1 btn btn-primary">Deny</button></td>' +
+         '<td><button onclick="approveTransfer(' + element.transferId + ')" type="button" class="mx-1 btn btn-primary">Approve</button>' +
+         '<button onclick="denyTransfer(' + element.transferId + ')" type="button" class="mx-1 btn btn-primary">Deny</button></td>' +
          '<td>' + element.source + '</td>' +
          '<td>' + element.destination + '</td>' +
          '<td>' + Number.parseFloat(element.amount).toFixed(2) + '</td>' +
@@ -62,7 +62,7 @@ function getTransfers() {
    return {
       transfers: [
          {
-            transferId: "3",
+            transferId: "33",
             amount: "400.0",
             source: "4",
             destination: "1",
@@ -71,7 +71,7 @@ function getTransfers() {
             responseDate: "",
          },
          {
-            transferId: "4",
+            transferId: "44",
             amount: "242.0",
             source: "7",
             destination: "1",
@@ -80,7 +80,7 @@ function getTransfers() {
             responseDate: "",
          },
          {
-            transferId: "7",
+            transferId: "77",
             amount: "121.12",
             source: "4",
             destination: "1",
@@ -103,10 +103,14 @@ function getTransfers() {
 
 function approveTransfer(tid) {
    // TODO approve transfer from id
+   showTransfers();
+   console.log("transfer id: " + tid + " approved");
 }
 
-function denyTransterf(tid) {
+function denyTransfer(tid) {
    // TODO deny transfer from id
+   showTransfers();
+   console.log("transfer id: " + tid + " denied");
 }
 
 // ************* Accounts **************************
@@ -178,6 +182,8 @@ var transferDestination;
 var currentAccount;
 
 function displayAccountTransactionHistory(accountNumber) {
+   snAccountDetails.style.display="block";
+
    let transactionObject = getTransactionHistory(accountNumber);
    let transactionList = transactionObject.transactions;
    let balance = Number.parseFloat(transactionObject.currentBalance);
