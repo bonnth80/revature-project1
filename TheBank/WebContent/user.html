@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>The Bank</title>
+
+   <!-- Bootstrap css -->
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous">
+
+   <!-- font awesome css -->
+   <link rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous">
+
+    <!-- Google fonts: Audiowide -->
+    <link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
+
+   <!-- local css -->
+   <link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+      <svg
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:cc="http://creativecommons.org/ns#"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns="http://www.w3.org/2000/svg"
+      id="svg8"
+      version="1.1"
+      viewBox="0 0 96.157303 93.633621"
+      height="48px"
+      width="48px">
+         <defs
+            id="defs2" />
+         <metadata
+            id="metadata5">
+         </metadata>
+         <g
+            transform="translate(-52.20613,-37.664796)"
+            id="layer1">
+            <path
+            id="path3713-6"
+            d="M 128.78671,94.651413 A 58.636603,37.869163 63.234114 0 0 128.70279,92.236019 69.549721,45.117747 50.839398 0 1 75.378755,108.48362 69.549721,45.117747 50.839398 0 1 52.20613,93.51116 58.636603,37.869163 63.234114 0 0 86.192285,128.12796 58.636603,37.869163 63.234114 0 0 128.78671,94.651413 Z"
+            style="fill:#00aad4;stroke-width:0.24077772" />
+            <path
+            id="path3713-6-8"
+            d="m 77.80634,99.928743 a 58.636604,37.869164 9.5037713 0 0 1.997042,1.361247 45.117747,69.549722 87.109056 0 1 18.446286,-52.60392 45.117747,69.549722 87.109056 0 1 25.780012,-9.825236 58.636604,37.869164 9.5037713 0 0 -48.015245,6.922233 58.636604,37.869164 9.5037713 0 0 1.791905,54.145676 z"
+            style="stroke-width:0.24077772" />
+            <path
+            id="path3713-6-8-0"
+            d="M 99.734193,55.207577 A 37.869164,58.636604 37.643428 0 0 97.592005,56.326582 45.117747,69.549722 25.248713 0 1 135.2785,97.4017 45.117747,69.549722 25.248713 0 1 131.78397,124.76834 37.869164,58.636604 37.643428 0 0 148.325,79.163781 37.869164,58.636604 37.643428 0 0 99.734193,55.207577 Z"
+            style="fill:#000000;stroke-width:0.24077772" />
+         </g>
+      </svg>
+      </i><span id="logo">NovaBank</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+         <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+         </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+         <input class="form-control mr-sm-2" type="search" placeholder="username" aria-label="Search">
+         <input class="form-control mr-sm-2" type="password" placeholder="password" aria-label="Search">
+         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+      <div class="navbar-nav">
+         <input class="btn btn-primary" type="button" value="Sign up">
+      </div>
+      </div>
+   </nav>
+
+   <!-- body -->
+   <div class="container">
+      <!--
+			1. Apply for a new account.
+			2. View accounts list.
+			3. Make a withdrawal.
+			4. Make a deposit
+			5. Post Money Transfer.
+			6. View incumbent transfer requests.
+			7. Sign out.
+			8. Exit application
+       -->
+
+       <!-- Welcome and User Info box -->
+      <h2>Welcome, Thomas</h2>
+      <div class="card m-4 p-3" style="width: 24rem;">
+         <h5 class="card-title">Transfers</h5>
+         <div classw="card-body">
+         You have 4 incoming transfer requests
+      </div>
+      <button type="button" class="btn btn-primary">View Transfers</button>
+      </div>
+
+      <!-- Accounts List -->
+      <div class="container border border-info rounded">
+      <table class="table">
+         <thead>
+            <tr>
+            <th scope="col">Account #</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+            <th scope="row">1</th>
+            <td>$654.12</td>
+            <td><button type="button" class="btn btn-primary">Details</button></td>
+            </tr>
+         </tbody>
+      </table>
+      </div>
+
+       <!-- Account Details -->
+
+      <div class="container border border-info rounded my-4">
+         <h4 class="nav-item">Account details for: 1</h4>
+         <nav class="my-2">
+            <button type="button" class="btn btn-primary nav-item">Withdraw</button>
+            <button type="button" class="btn btn-primary nav-item">Deposit</button>
+            <button type="button" class="btn btn-primary nav-item">Transfer</button>
+         </nav>
+         <h5>Transaction History</h5>
+         <table class="table">
+            <thead>
+               <tr>
+                  <th scope="col">Acting Party</th>
+                  <th scope="col">Credit</th>
+                  <th scope="col">Debit</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Balance</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>NETFLIX</th>
+                  <td style="color: green"></td>
+                  <td style="color: red">$12.00</td>
+                  <td>10/8/2019</td>
+                  <td>$611.38</td>
+               </tr>
+               <tr>
+                  <td>NERDS VENDING, LLC</th>
+                  <td style="color: green"></td>
+                  <td style="color: red">$2.75</td>
+                  <td>10/6/2019</td>
+                  <td>$623.38</td>
+               </tr>
+               <tr>
+                  <td>TACO BELL INC</th>
+                  <td style="color: green"></td>
+                  <td style="color: red">$12.09</td>
+                  <td>10/6/2019</td>
+                  <td>$626.13</td>
+               </tr>
+               <tr>
+                  <td>DEPOSIT</th>
+                  <td style="color: green">$70.00</td>
+                  <td style="color: red"></td>
+                  <td>10/6/2019</td>
+                  <td>$648.22</td>
+               </tr>
+               <tr>
+                  <td>Erikson and daughters</th>
+                  <td style="color: green">$42.24</td>
+                  <td style="color: red"></td>
+                  <td>10/4/2019</td>
+                  <td>$578.22</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+   <!-- scripts -->
+   <mysscripsection>
+      <!-- JQuery scripts -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+         crossorigin="anonymous"></script>
+      <!-- Pooper scripts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+         crossorigin="anonymous"></script>
+      <!-- Bootstrap scripts -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+         crossorigin="anonymous"></script>
+      <script src="script/user.js"></script>
+   </mysscripsection>
+</body>
+</html>

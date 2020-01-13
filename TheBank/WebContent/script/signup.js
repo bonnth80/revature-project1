@@ -94,7 +94,7 @@ var disableSubmitButton = function() {
 }
 
 inpFName.addEventListener("input",() => {
-   if (inpFName.value === null || inpFName.value === "") {
+   if (inpFName.value === "") {
       lblFName.style.color = "red";
       fNameValidated = false;
    } else {
@@ -104,8 +104,8 @@ inpFName.addEventListener("input",() => {
    checkFormValidation();
 });
 
-inpLName.addEventListener("input",() => {
-   if (inpLName.value === null || inpLName.value === "") {
+inpLName.addEventListener("input", () => {
+   if (inpLName.value === "") {
       lblLName.style.color = "red";
       lNameValidated = false;
    } else {
@@ -117,7 +117,7 @@ inpLName.addEventListener("input",() => {
 });
 
 inpEmail.addEventListener("input",() => {
-   if (inpEmail.value === null || inpEmail.value === "") {
+   if (inpEmail.value === "") {
       lblEmail.style.color = "red";
       document.getElementsByClassName("emailMatchHint")[0].innerHTML =
       "&nbsp;";
@@ -134,11 +134,10 @@ inpEmail.addEventListener("input",() => {
       emailValidated = true;
    }
    checkFormValidation();
-
 });
 
 inpUsername.addEventListener("input",() => {
-   if (inpUsername.value === null || inpUsername.value === "") {
+   if (inpUsername.value === "") {
       lblUsername.style.color = "red";
       usernameValidated = false;
    } else {
@@ -149,7 +148,7 @@ inpUsername.addEventListener("input",() => {
 });
 
 inpPassword.addEventListener("input",() => {
-   if (inpPassword.value === null || inpPassword.value === ""
+   if (inpPassword.value === ""
    || inpPassword.value != inpConfirm.value) {
       lblPassword.style.color = "red";
       lblConfirm.style.color = "red";
@@ -173,7 +172,7 @@ inpPassword.addEventListener("input",() => {
 });
 
 inpConfirm.addEventListener("input",() => {
-   if (inpPassword.value === null || inpPassword.value === ""
+   if (inpPassword.value === ""
    || inpPassword.value != inpConfirm.value) {
       lblPassword.style.color = "red";
       lblConfirm.style.color = "red";
@@ -197,7 +196,7 @@ inpConfirm.addEventListener("input",() => {
 });
 
 inpPPhone.addEventListener("input",() => {
-   if (inpPPhone.value === null || inpPPhone.value === "") {
+   if (inpPPhone.value === "") {
       lblPPhone.style.color = "red";
       document.getElementsByClassName("pPhoneMatchHint")[0].innerHTML =
       "&nbsp;";
@@ -230,7 +229,7 @@ checkFormValidation();
 });
 
 inpSSN.addEventListener("input",() => {
-   if (inpSSN.value === null || inpSSN.value === "") {
+   if (inpSSN.value === "") {
       lblSSN.style.color = "red";
       document.getElementsByClassName("ssnMatchHint")[0].innerHTML = "&nbsp;";
       ssnValidated = false;
@@ -248,7 +247,7 @@ inpSSN.addEventListener("input",() => {
 });
 
 inpStreetAddress1.addEventListener("input",() => {
-   if (inpStreetAddress1.value === null || inpStreetAddress1.value === "") {
+   if (inpStreetAddress1.value === "") {
       lblStreetAddress1.style.color = "red";
       streetaddressValidated = false;
    } else {
@@ -264,7 +263,7 @@ inpStreetAddress2.addEventListener("input",() => {
 });
 
 inpState.addEventListener("input",() => {
-   if (inpState.value === null || inpState.value === "") {
+   if (inpState.value === "") {
       lblState.style.color = "red";
       stateValidated = false;
    } else {
@@ -275,7 +274,7 @@ inpState.addEventListener("input",() => {
 });
 
 inpZip.addEventListener("input",() => {
-   if (inpZip.value === null || inpZip.value === "") {
+   if (inpZip.value === "") {
       lblZip.style.color = "red";
       zipValidated = false;
    } else {
@@ -284,4 +283,3 @@ inpZip.addEventListener("input",() => {
    }
    checkFormValidation();
 });
-
