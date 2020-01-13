@@ -31,15 +31,17 @@ function showTransfers() {
       <tbody>`;
 
    transfers.forEach((element) => {
-      transferTable +=
-      '<tr>' +
-      '<td><button type="button" class="mx-1 btn btn-primary">Approve</button>' +
-      '<button type="button" class="mx-1 btn btn-primary">Deny</button></td>' +
-      '<td>' + element.sourceAccount + '</td>' +
-      '<td>' + element.destinationAccount + '</td>' +
-      '<td>' + element.amount + '</td>' +
-      '<td>' + element.requestDate + '</td>' +
-      '</tr>'
+      if (element.status == 0) {
+         transferTable +=
+         '<tr>' +
+         '<td><button onclick="' + element.transferId + '" type="button" class="mx-1 btn btn-primary">Approve</button>' +
+         '<button type="button" class="mx-1 btn btn-primary">Deny</button></td>' +
+         '<td>' + element.source + '</td>' +
+         '<td>' + element.destination + '</td>' +
+         '<td>' + Number.parseFloat(element.amount).toFixed(2) + '</td>' +
+         '<td>' + element.requestDate + '</td>' +
+         '</tr>'
+      }
    })
 
    transferTable +=`</tbody></table>`;
@@ -60,33 +62,52 @@ function getTransfers() {
    return {
       transfers: [
          {
-            amount: "400.00",
-            sourceAccount: "4",
-            destinationAccount: "1",
-            requestDate: "10/01/2019"
+            transferId: "3",
+            amount: "400.0",
+            source: "4",
+            destination: "1",
+            status: "0",
+            requestDate: "10/01/2019",
+            responseDate: "",
          },
          {
-            amount: "242.00",
-            sourceAccount: "7",
-            destinationAccount: "1",
-            requestDate: "10/02/2019"
+            transferId: "4",
+            amount: "242.0",
+            source: "7",
+            destination: "1",
+            status: "0",
+            requestDate: "10/02/2019",
+            responseDate: "",
          },
          {
-            amount: "123.40",
-            sourceAccount: "4",
-            destinationAccount: "1",
-            requestDate: "10/03/2019"
+            transferId: "7",
+            amount: "121.12",
+            source: "4",
+            destination: "1",
+            status: "0",
+            requestDate: "10/03/2019",
+            responseDate: "",
          },
          {
+            transferId: "11",
             amount: "1050.76",
-            sourceAccount: "6",
-            destinationAccount: "1",
-            requestDate: "10/11/2019"
+            source: "6",
+            destination: "1",
+            status: "0",
+            requestDate: "10/11/2019",
+            responseDate: "",
          },
       ]
    };
 }
 
+function approveTransfer(tid) {
+   // TODO approve transfer from id
+}
+
+function denyTransterf(tid) {
+   // TODO deny transfer from id
+}
 
 // ************* Accounts **************************
 var scAccounts = document.getElementById("scAccounts");
@@ -242,7 +263,7 @@ function getTransactionHistory(accountNumber) {
             actingParty: "DEPOSIT",
             credit: "100.00",
             debit: "",
-            transactionDate: "10/013/2019",
+            transactionDate: "10/13/2019",
             transferId: ""
          },
          {
