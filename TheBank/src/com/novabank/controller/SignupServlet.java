@@ -1,7 +1,7 @@
 package com.novabank.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,9 +18,9 @@ public class SignupServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter rd = response.getWriter();
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		PrintWriter rd = response.getWriter();
+//		
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 

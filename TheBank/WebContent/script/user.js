@@ -1,4 +1,24 @@
 console.log("user.js connected");
+/*
+  var xh = new XMLHttpRequest;
+   var pokeString = document.getElementById("inpPokeText").value;
+   var getStr = "https://pokeapi.co/api/v2/pokemon/" + pokeString.toLowerCase();
+   //console.log(getStr);
+   xh.open('GET',getStr);
+   var pokeContent = document.getElementById("pokeContent");
+   xh.onload = function(){
+      if ( this.readyState == 4 && this.status == 200 ) {
+         let resText = this.responseText;
+         let res = JSON.parse(resText);
+         //console.log(res);
+         pokeContent.innerHTML = stringify(res);
+      } else if (this.readyState == 4 && this.status == 404){
+            pokeContent.innerHTML = "No such pokemon. Try entering \"Pikachu\"";
+
+      }
+   };
+   xh.send();
+*/
 
 // ************* Transfers **************************
 var scTransfers = document.getElementById("scTransfers");
@@ -117,57 +137,70 @@ function denyTransfer(tid) {
 var scAccounts = document.getElementById("scAccounts");
 
 function populateAccounts() {
-   let accounts = getAccounts().accounts;
-   var accountsTable = `<h4>Accounts</h4>
-   <a href="apply.html" class="m-2 ml-auto btn btn-info">Apply For a New Account</a>
-   <table class="table">
-      <thead>
-         <tr>
-         <th scope="col">Actions</th>
-         <th scope="col">Account Number</th>
-         <th scope="col">Balance</th>
-         </tr>
-      </thead>
-      <tbody>`;
+	
+	   var url = new URL(window.location.href);
+	   var userParam = url.searchParams.get("user");
+	   var xh = new XMLHttpRequest;
 
-   accounts.forEach((element)=>{
-      accountsTable +=
-      '<tr>' +
-      '<td><button onclick="displayAccountTransactionHistory(' + element.accountNumber + ')" type="button" class="btn btn-primary">Details</button></td>' +
-      '<td>' + element.accountNumber + '</td>' +
-      '<td>' + element.availableBalance + '</td>' +
-      '</tr>'
-   })
+	   var pStr = "http://localhost:1235/TheBank/user?";
+	   pStr += "username=" + userParam;
 
-   accountsTable += `</tbody></table></div>`;
+	   xh.open('GET',pStr);
+	   xh.onload = function(){
+	      if ( this.readyState == 4 && this.status == 200 ) {
+	      var accounts = JSON.parse(this.responseText);
+	      var accountsTable = `<h4>Accounts</h4>
+	    	   <a href="apply.html" class="m-2 ml-auto btn btn-info">Apply For a New Account</a>
+	    	   <table class="table">
+	    	      <thead>
+	    	         <tr>
+	    	         <th scope="col">Actions</th>
+	    	         <th scope="col">Account Number</th>
+	    	         <th scope="col">Starting Balance</th>
+	    	         </tr>
+	    	      </thead>
+	    	      <tbody>`;
 
-   scAccounts.innerHTML = accountsTable;
+	    	   accounts.forEach((element)=>{
+	    	      accountsTable +=
+	    	      '<tr>' +
+	    	      '<td><button onclick="displayAccountTransactionHistory(' + element.accountNumber + ')" type="button" class="btn btn-primary">Details</button></td>' +
+	    	      '<td>' + element.accountNumber + '</td>' +
+	    	      '<td>' + element.startingBalance + '</td>' +
+	    	      '</tr>'
+	    	   })
 
+	    	   accountsTable += `</tbody></table></div>`;
 
+	    	   scAccounts.innerHTML = accountsTable;
+	      } else if (this.readyState == 4 && this.status == 404){
+	         console.warn("b-guh?");
+	         return null;
+	      }
+	   };
+	   xh.send();
 }
 
 function getAccounts() {
-   // TODO: replace temp stub getAccounts
-   return {
-      accounts: [
-         {
-            accountNumber: "1",
-            availableBalance: "425.22"
-         },
-         {
-            accountNumber: "5",
-            availableBalance: "25.22"
-         },
-         {
-            accountNumber: "8",
-            availableBalance: "241.22"
-         },
-         {
-            accountNumber: "11",
-            availableBalance: "4864.22"
-         }
-      ]
-   }
+   var url = new URL(window.location.href);
+   var userParam = url.searchParams.get("user");
+   var xh = new XMLHttpRequest;
+
+   var pStr = "http://localhost:1235/TheBank/user?";
+   pStr += "username=" + userParam;
+
+   xh.open('GET',pStr);
+   xh.onload = function(){
+      if ( this.readyState == 4 && this.status == 200 ) {
+      var resp = JSON.parse(this.responseText);
+      console.log(resp);
+      return resp;
+      } else if (this.readyState == 4 && this.status == 404){
+         console.warn("b-guh?");
+         return null;
+      }
+   };
+   xh.send();
 }
 
 populateAccounts();

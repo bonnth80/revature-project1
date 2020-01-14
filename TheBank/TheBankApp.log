@@ -990,3 +990,80 @@ Please select from these available actions:
 2020-01-12 20:58:31 INFO  BankMain:623 - 
 Goodbye.
 
+2020-01-13 19:44:11 INFO  BankMain:59 - Please make a selection:
+	1. Existing User Sign-in
+	2. New User Sign-up
+
+2020-01-13 19:44:13 INFO  BankMain:68 - Username:
+2020-01-13 19:44:14 INFO  BankMain:70 - Password: 
+2020-01-13 19:44:16 INFO  BankMain:76 - 
+Current user is: Employee
+2020-01-13 19:44:16 INFO  Menu:31 - 
+Please select from these available actions:
+2020-01-13 19:44:16 INFO  Menu:32 - 	1. View pending account applications. (2)
+2020-01-13 19:44:16 INFO  Menu:33 - 	2. Retrieve customer account info.
+2020-01-13 19:44:16 INFO  Menu:34 - 	3. Retrieve transaction log.
+2020-01-13 19:44:16 INFO  Menu:35 - 	4. Register new user.
+2020-01-13 19:44:16 INFO  Menu:36 - 	5. Sign out.
+2020-01-13 19:44:16 INFO  Menu:37 - 	6. Exit application.
+2020-01-13 19:44:18 INFO  BankMain:623 - 
+Goodbye.
+
+2020-01-13 19:45:30 INFO  BankMain:59 - Please make a selection:
+	1. Existing User Sign-in
+	2. New User Sign-up
+
+2020-01-13 19:45:32 INFO  BankMain:68 - Username:
+2020-01-13 19:45:33 INFO  BankMain:70 - Password: 
+2020-01-13 19:45:34 INFO  BankMain:76 - 
+Current user is: Employee
+2020-01-13 19:45:34 INFO  Menu:31 - 
+Please select from these available actions:
+2020-01-13 19:45:34 INFO  Menu:32 - 	1. View pending account applications. (2)
+2020-01-13 19:45:34 INFO  Menu:33 - 	2. Retrieve customer account info.
+2020-01-13 19:45:34 INFO  Menu:34 - 	3. Retrieve transaction log.
+2020-01-13 19:45:34 INFO  Menu:35 - 	4. Register new user.
+2020-01-13 19:45:34 INFO  Menu:36 - 	5. Sign out.
+2020-01-13 19:45:34 INFO  Menu:37 - 	6. Exit application.
+2020-01-13 19:45:36 INFO  BankMain:59 - Please make a selection:
+	1. Existing User Sign-in
+	2. New User Sign-up
+
+2020-01-13 19:45:38 INFO  BankMain:551 - Welcome to New User creation. Please enter the information as follows.
+2020-01-13 19:45:38 INFO  BankMain:573 - 
+First Name:
+2020-01-13 20:04:55 INFO  BankMain:69 - Please make a selection:
+	1. Existing User Sign-in
+	2. New User Sign-up
+
+2020-01-13 20:05:03 INFO  BankMain:78 - Username:
+2020-01-13 20:05:05 INFO  BankMain:80 - Password: 
+2020-01-13 20:05:06 INFO  BankMain:86 - 
+Current user is: Employee
+2020-01-13 20:05:06 INFO  Menu:31 - 
+Please select from these available actions:
+2020-01-13 20:05:06 INFO  Menu:32 - 	1. View pending account applications. (2)
+2020-01-13 20:05:06 INFO  Menu:33 - 	2. Retrieve customer account info.
+2020-01-13 20:05:06 INFO  Menu:34 - 	3. Retrieve transaction log.
+2020-01-13 20:05:06 INFO  Menu:35 - 	4. Register new user.
+2020-01-13 20:05:06 INFO  Menu:36 - 	5. Sign out.
+2020-01-13 20:05:06 INFO  Menu:37 - 	6. Exit application.
+2020-01-13 20:05:10 INFO  BankMain:633 - 
+Goodbye.
+
+2020-01-13 20:05:39 INFO  BankMain:62 - Please make a selection:
+	1. Existing User Sign-in
+	2. New User Sign-up
+
+2020-01-13 20:05:41 INFO  BankMain:71 - Username:
+2020-01-13 20:05:42 INFO  BankMain:73 - Password: 
+2020-01-13 20:05:43 INFO  BankMain:79 - 
+Current user is: Employee
+2020-01-13 20:05:43 INFO  Menu:31 - 
+Please select from these available actions:
+2020-01-13 20:05:43 INFO  Menu:32 - 	1. View pending account applications. (2)
+2020-01-13 20:05:43 INFO  Menu:33 - 	2. Retrieve customer account info.
+2020-01-13 20:05:43 INFO  Menu:34 - 	3. Retrieve transaction log.
+2020-01-13 20:05:43 INFO  Menu:35 - 	4. Register new user.
+2020-01-13 20:05:43 INFO  Menu:36 - 	5. Sign out.
+2020-01-13 20:05:43 INFO  Menu:37 - 	6. Exit application.

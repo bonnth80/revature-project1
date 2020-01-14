@@ -1,5 +1,7 @@
 package com.novabank.ui;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,18 +35,19 @@ public class BankMain {
 		boolean runAppLoop = true;
 		boolean runUserLoop = true;
 		
-		// Setup up Oracle custom connection
-		if (args.length >= 1) {
-			String dbUrl = args[0];
-			OracleConnection.setConnectionURL(dbUrl);			
-		}
-		
-		if (args.length == 3) {
-			String dbUn = args[1];
-			String dbPw = args[2];
-			OracleConnection.setUsername(dbUn);
-			OracleConnection.setPassword(dbPw);	
-		}
+//		
+//		// Setup up Oracle custom connection
+//		if (args.length >= 1) {
+//			String dbUrl = args[0];
+//			OracleConnection.setConnectionURL(dbUrl);			
+//		}
+//		
+//		if (args.length == 3) {
+//			String dbUn = args[1];
+//			String dbPw = args[2];
+//			OracleConnection.setUsername(dbUn);
+//			OracleConnection.setPassword(dbPw);	
+//		}
 		
 		while (runAppLoop) {
 			runUserLoop = true;
