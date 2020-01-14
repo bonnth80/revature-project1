@@ -20,6 +20,18 @@ console.log("user.js connected");
    xh.send();
 */
 
+// SIgn out button
+var btnSignout = document.getElementById("btnSignout");
+
+btnSignout.addEventListener("click", () => {
+   var xh = new XMLHttpRequest;
+
+   xh.open("GET", "http://localhost:1235/TheBank/signout");
+   xh.send();
+
+   window.location.href = "http://localhost:1235/TheBank/index.html";
+})
+
 // ************* Transfers **************************
 var scTransfers = document.getElementById("scTransfers");
 var btnViewTransfers = document.getElementById("btnViewTransfers");
@@ -137,7 +149,7 @@ function denyTransfer(tid) {
 var scAccounts = document.getElementById("scAccounts");
 
 function populateAccounts() {
-	
+
 	   var url = new URL(window.location.href);
 	   var userParam = url.searchParams.get("user");
 	   var xh = new XMLHttpRequest;
@@ -179,28 +191,6 @@ function populateAccounts() {
 	      }
 	   };
 	   xh.send();
-}
-
-function getAccounts() {
-   var url = new URL(window.location.href);
-   var userParam = url.searchParams.get("user");
-   var xh = new XMLHttpRequest;
-
-   var pStr = "http://localhost:1235/TheBank/user?";
-   pStr += "username=" + userParam;
-
-   xh.open('GET',pStr);
-   xh.onload = function(){
-      if ( this.readyState == 4 && this.status == 200 ) {
-      var resp = JSON.parse(this.responseText);
-      console.log(resp);
-      return resp;
-      } else if (this.readyState == 4 && this.status == 404){
-         console.warn("b-guh?");
-         return null;
-      }
-   };
-   xh.send();
 }
 
 populateAccounts();
