@@ -147,6 +147,7 @@ function denyTransfer(tid) {
 
 // ************* Accounts **************************
 var scAccounts = document.getElementById("scAccounts");
+var dTransferCount = document.getElementById("dTransferCount");
 
 function populateAccounts() {
 
@@ -161,6 +162,9 @@ function populateAccounts() {
 	   xh.onload = function(){
 	      if ( this.readyState == 4 && this.status == 200 ) {
 	      var accounts = JSON.parse(this.responseText);
+         console.log(accounts);
+         dTransferCount.innerHTML = accounts[0];
+
 	      var accountsTable = `<h4>Accounts</h4>
 	    	   <a href="apply.html" class="m-2 ml-auto btn btn-info">Apply For a New Account</a>
 	    	   <table class="table">
@@ -173,7 +177,7 @@ function populateAccounts() {
 	    	      </thead>
 	    	      <tbody>`;
 
-	    	   accounts.forEach((element)=>{
+	    	   accounts[1].forEach((element)=>{
 	    	      accountsTable +=
 	    	      '<tr>' +
 	    	      '<td><button onclick="displayAccountTransactionHistory(' + element.accountNumber + ')" type="button" class="btn btn-primary">Details</button></td>' +
@@ -186,7 +190,7 @@ function populateAccounts() {
 
 	    	   scAccounts.innerHTML = accountsTable;
 	      } else if (this.readyState == 4 && this.status == 404){
-	         console.warn("b-guh?");
+	         //console.warn("b-guh?");
 	         return null;
 	      }
 	   };

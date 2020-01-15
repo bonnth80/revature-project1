@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.novabank.exception.BusinessException;
 import com.novabank.to.User;
+import com.novabank.transferBO.TransferBoImp;
 import com.novabank.userBO.UserBoImp;
 
 /**
@@ -43,8 +44,8 @@ public class SigninServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			//response.setContentType("text/html;charset=UTF-8");
-//			System.out.println("sending redirect now, hypothetically");
-//			response.sendRedirect("user.html");
+			//System.out.println("sending redirect now, hypothetically");
+			//response.sendRedirect("user.html");
 		} catch (BusinessException e) {
 			System.out.println("Error: " + e);
 		}

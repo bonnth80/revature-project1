@@ -2,6 +2,7 @@ package com.novabank.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import com.novabank.accountBO.AccountBoImp;
 import com.novabank.exception.BusinessException;
 import com.novabank.to.Account;
 import com.novabank.to.User;
+import com.novabank.transferBO.TransferBoImp;
 
 
 /**
@@ -30,13 +32,17 @@ public class UserServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		Gson gson = new Gson();
-		System.out.println(request.getSession().getAttribute("user"));
+		//System.out.println(request.getSession().getAttribute("user"));
 		User user = (User)request.getSession().getAttribute("user");
 		try {
 			List<Account> accounts = new AccountBoImp().getAccountsByUserId(user.getUserId());
-			String json = gson.toJson(accounts);
+			int transferCount = new TransferBoImp().getTransferCountByUserId(user.getUserId());
+			List<Object> resData = new ArrayList<>();
+			resData.add(new Integer(transferCount));
+			resData.add(accounts);
+			String json = gson.toJson(resData);
 			System.out.println(json);
-			out.print(gson.toJson(accounts));
+			out.print(gson.toJson(resData));
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
