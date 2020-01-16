@@ -1,4 +1,4 @@
-console.log("user.js connected");
+console.log("user.js connected: 2");
 /*
   var xh = new XMLHttpRequest;
    var pokeString = document.getElementById("inpPokeText").value;
@@ -36,6 +36,8 @@ btnSignout.addEventListener("click", () => {
 var scTransfers = document.getElementById("scTransfers");
 var btnViewTransfers = document.getElementById("btnViewTransfers");
 var btnHideTransfers = document.getElementById("btnHideTransfers");
+var dTransferCount = document.getElementById("dTransferCount");
+var transferCount = 0;
 btnViewTransfers.addEventListener("click", showTransfers);
 btnHideTransfers.addEventListener("click", hideTransfers);
 
@@ -47,56 +49,77 @@ function showTransfers() {
    btnHideTransfers.style.display = "inline";
    btnViewTransfers.style.display = "none";
 
-   let transfers = getTransfers().transfers;
-
+   var url = new URL(window.location.href);
+   var userParam = url.searchParams.get("user");
    var xh = new XMLHttpRequest;
    var pStr = "http://localhost:1235/TheBank/transfers?";
    pStr += "username=" + userParam;
 
-   xh.open('GET',getStr);
+   xh.open('GET',pStr);
 
    xh.onload = function(){
       if ( this.readyState == 4 && this.status == 200 ) {
          let resText = this.responseText;
-         let res = JSON.parse(resText);
-         pokeContent.innerHTML = stringify(res);
+         let transfers = JSON.parse(resText);
+
+         var transferTable = `<h4>Incoming Transfers</h4>
+         <table class="table">
+            <thead>
+               <tr>
+                  <th scope="col">Actions</th>
+                  <th scope="col">Source Account</th>
+                  <th scope="col">Destination Account</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Date</th>
+               </tr>
+            </thead>
+            <tbody>`;
+
+         transfers.forEach((element) => {
+            if (element.status == 0) {
+               transferTable +=
+               '<tr>' +
+               '<td><button onclick="updateTransferStatus(' + element.transferId + ', 1)" type="button" class="mx-1 btn btn-primary">Approve</button>' +
+               '<button onclick="updateTransferStatus(' + element.transferId + ', 2)" type="button" class="mx-1 btn btn-primary">Deny</button></td>' +
+               '<td>' + element.source + '</td>' +
+               '<td>' + element.destination + '</td>' +
+               '<td>' + Number.parseFloat(element.amount).toFixed(2) + '</td>' +
+               '<td>' + element.requestDate + '</td>' +
+               '</tr>'
+            }
+
+         })
+         transferTable +=`</tbody></table>`;
+         scTransfers.innerHTML = transferTable;
       } else if (this.readyState == 4 && this.status == 404){
-            console.warn('response from transfers returned 404');
+            console.warn('response from GET transfers returned 404');
       }
    };
    xh.send();
-
-   var transferTable = `<h4>Incoming Transfers</h4>
-   <table class="table">
-      <thead>
-         <tr>
-            <th scope="col">Actions</th>
-            <th scope="col">Source Account</th>
-            <th scope="col">Destination Account</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-         </tr>
-      </thead>
-      <tbody>`;
-
-   transfers.forEach((element) => {
-      if (element.status == 0) {
-         transferTable +=
-         '<tr>' +
-         '<td><button onclick="approveTransfer(' + element.transferId + ')" type="button" class="mx-1 btn btn-primary">Approve</button>' +
-         '<button onclick="denyTransfer(' + element.transferId + ')" type="button" class="mx-1 btn btn-primary">Deny</button></td>' +
-         '<td>' + element.source + '</td>' +
-         '<td>' + element.destination + '</td>' +
-         '<td>' + Number.parseFloat(element.amount).toFixed(2) + '</td>' +
-         '<td>' + element.requestDate + '</td>' +
-         '</tr>'
-      }
-   })
-
-   transferTable +=`</tbody></table>`;
-
-   scTransfers.innerHTML = transferTable;
 }
+
+function updateTransferStatus(transferId, status) {
+   var url = new URL(window.location.href);
+   var userParam = url.searchParams.get("user");
+   var xh = new XMLHttpRequest;
+   var pStr = "http://localhost:1235/TheBank/transfers?";
+   pStr += "username=" + userParam
+         + "&transferid=" + transferId
+         + "&status=" + status;
+
+   xh.open('PUT',pStr);
+   xh.onload = function(){
+      if ( this.readyState == 4 && this.status == 200 ) {
+         let resText = this.responseText;
+         let transfers = JSON.parse(resText);
+         dTransferCount.innerHTML = --transferCount;
+         showTransfers();
+      } else if (this.readyState == 4 && this.status == 404){
+            console.warn('response from POST transfers returned 404');
+      }
+   }
+   xh.send();
+};
 
 function hideTransfers() {
    scTransfers.style.padding = "0px 12px";
@@ -106,41 +129,24 @@ function hideTransfers() {
    btnViewTransfers.style.display = "inline";
 }
 
-function getTransfers() {
-   // TODO: replace temp stub getTransfers
-}
-
-function approveTransfer(tid) {
-   // TODO approve transfer from id
-   showTransfers();
-   console.log("transfer id: " + tid + " approved");
-}
-
-function denyTransfer(tid) {
-   // TODO deny transfer from id
-   showTransfers();
-   console.log("transfer id: " + tid + " denied");
-}
 
 // ************* Accounts **************************
 var scAccounts = document.getElementById("scAccounts");
-var dTransferCount = document.getElementById("dTransferCount");
 
 function populateAccounts() {
-
 	   var url = new URL(window.location.href);
 	   var userParam = url.searchParams.get("user");
 	   var xh = new XMLHttpRequest;
-
 	   var pStr = "http://localhost:1235/TheBank/user?";
-	   pStr += "username=" + userParam;
+      pStr += "username=" + userParam;
 
 	   xh.open('GET',pStr);
 	   xh.onload = function(){
 	      if ( this.readyState == 4 && this.status == 200 ) {
 	      var accounts = JSON.parse(this.responseText);
          console.log(accounts);
-         dTransferCount.innerHTML = accounts[0];
+         transferCount = Number.parseInt(accounts[0]);
+         dTransferCount.innerHTML = transferCount;
 
 	      var accountsTable = `<h4>Accounts</h4>
 	    	   <a href="apply.html" class="m-2 ml-auto btn btn-info">Apply For a New Account</a>

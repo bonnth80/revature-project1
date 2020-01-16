@@ -16,9 +16,28 @@ import com.novabank.to.Transfer;
 public class TransferDaoImp implements TransferDAO {
 
 	@Override
-	public Transfer getTransferById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Transfer getTransferById(int id) throws BusinessException {
+		System.out.println("Getting transfer by id: " + id);
+		try (Connection connection = OracleConnection.getConnection()) {
+			String sql =  "SELECT transfer_id, amount, source_account, destination_account, status, request_Date, response_date "
+					+ "FROM transfer_request "
+					+ "WHERE transfer_id = ? ";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			return new Transfer(
+						rs.getInt(1),
+						rs.getFloat(2),
+						rs.getInt(3),
+						rs.getInt(4),
+						rs.getInt(5),
+						rs.getDate(6),
+						rs.getDate(6)
+						);
+		} catch (ClassNotFoundException | SQLException e) {  
+			throw new BusinessException("Internal error: " + e);
+		}
 	}
 
 	@Override
@@ -138,6 +157,7 @@ public class TransferDaoImp implements TransferDAO {
 	@Override
 	public boolean updateTransferStatus(Transfer transfer, int status) throws BusinessException {
 		boolean execute;
+		System.out.println("updating Transfer status: " + status);
 		try (Connection connection = OracleConnection.getConnection()) {
 			String sql = "UPDATE transfer_request "
 					+ "SET status = ?, response_date = ? "
@@ -148,6 +168,7 @@ public class TransferDaoImp implements TransferDAO {
 			ps.setInt(3, transfer.getTransferId());
 			execute = ps.execute();			
 		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println(e);
 			throw new BusinessException("Internal error: " + e);
 		}
 		

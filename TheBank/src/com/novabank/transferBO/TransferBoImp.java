@@ -10,9 +10,9 @@ import com.novabank.transferDAO.TransferDaoImp;
 public class TransferBoImp implements TransferBO {
 
 	@Override
-	public Transfer getTransferById(int id) {
+	public Transfer getTransferById(int id) throws BusinessException {
 		// TODO Auto-generated method stub
-		return null;
+		return new TransferDaoImp().getTransferById(id);
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class TransferBoImp implements TransferBO {
 	@Override
 	public boolean updateTransferStatus(Transfer transfer, int status) throws BusinessException {
 		// TODO Auto-generated method stub
-		return false;
+		return new TransferDaoImp().updateTransferStatus(transfer, status);
 	}
 
 }

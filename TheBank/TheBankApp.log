@@ -1067,3 +1067,7 @@ Please select from these available actions:
 2020-01-13 20:05:43 INFO  Menu:35 - 	4. Register new user.
 2020-01-13 20:05:43 INFO  Menu:36 - 	5. Sign out.
 2020-01-13 20:05:43 INFO  Menu:37 - 	6. Exit application.
+2020-01-15 19:29:34 INFO  BankMain:62 - Please make a selection:
+	1. Existing User Sign-in
+	2. New User Sign-up
+

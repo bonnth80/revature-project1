@@ -7,7 +7,7 @@ import com.novabank.exception.BusinessException;
 import com.novabank.to.Transfer;
 
 public interface TransferDAO {
-	Transfer getTransferById(int id);
+	Transfer getTransferById(int id) throws BusinessException;
 	int getMaxTransferId() throws BusinessException;
 	int getTransferCountByUserId(int userId) throws BusinessException;
 	List<Transfer> getTransfersByUserId(int userId) throws BusinessException;

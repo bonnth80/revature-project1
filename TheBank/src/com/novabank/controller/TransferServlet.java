@@ -47,4 +47,35 @@ public class TransferServlet extends HttpServlet {
 		}
 	}
 
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("TransferServlet handling post request");
+        response.setContentType("application/jason");        
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        User user = (User)request.getSession().getAttribute("user");
+		try {
+			TransferBoImp transferBo = new TransferBoImp();
+			int transferid = Integer.parseInt(request.getParameter("transferid"));
+			System.out.println("Getting transfer for id: " + transferid);
+			Transfer transfer = transferBo.getTransferById(transferid);
+			System.out.println("... " + transfer);
+			int newStatus = Integer.parseInt(request.getParameter("status"));
+			System.out.println(newStatus);
+			if (newStatus == 1 || newStatus == 2) {
+				System.out.println("in transfer zone for transferid: " + transfer.getTransferId());
+				boolean test = new TransferBoImp().updateTransferStatus(transfer, newStatus);
+				System.out.println("test: " + test);
+				out.print(gson.toJson(transfer));				
+			} else {
+				System.out.println("Something went wrong");
+				out.print(gson.toJson("invalid update request"));
+				
+			}
+			
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
