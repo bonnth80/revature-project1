@@ -193,6 +193,7 @@ var depositAmount;
 var transferAmount;
 var transferDestination;
 var currentAccount;
+var endingBalance;
 
 function displayAccountTransactionHistory(accountNumber, startingBalance) {
    snAccountDetails.style.display="block";
@@ -232,14 +233,14 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
          </div>
          <div class="input-group mb-3">
             <div class="input-group-prepend">
-            <button onclick="postDeposit(currentAccount, withdrawAmount)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
+            <button onclick="postDeposit(currentAccount, withdrawAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
             <span class="input-group-text">$</span>
             </div>
             <input type="text" oninput="setWithdrawAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
          </div>
          <div class="input-group mb-3">
             <div class="input-group-prepend">
-               <button onclick="postTransfer(currentAccount, transferDestination, transferAmount)" class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
+               <button onclick="postTransfer(currentAccount, transferDestination, transferAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
                <span class="input-group-text text-info">Amount | Destination</span>
                <span class="input-group-text">$</span>
             </div>
@@ -284,6 +285,7 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
 
          })
 
+         endingBalance = balance;
          snAccountDetails.innerHTML = accountDetailsHeader + accountDetailsTable;
 
       } else if (this.readyState == 4 && this.status == 404){
@@ -295,66 +297,29 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
 
 }
 
-function getTransactionHistory(accountNumber) {
-   // TODO: replace temp stub getAccounts
-   return {
-      transactions: [
-         {
-            transactionId: "32",
-            accountId: accountNumber,
-            actingParty: "merle's bbq",
-            credit: "",
-            debit: "14.25",
-            transactionDate: "10/02/2019",
-            transferId: ""
-         },
-         {
-            transactionId: "42",
-            accountId: accountNumber,
-            actingParty: "WITHDRAWAL",
-            credit: "",
-            debit: "100.00",
-            transactionDate: "10/01/2019",
-            transferId: ""
-         },
-         {
-            transactionId: "55",
-            accountId: accountNumber,
-            actingParty: "Maker mill",
-            credit: "215.51",
-            debit: "",
-            transactionDate: "10/06/2019",
-            transferId: ""
-         },
-         {
-            transactionId: "61",
-            accountId: accountNumber,
-            actingParty: "DEPOSIT",
-            credit: "100.00",
-            debit: "",
-            transactionDate: "10/13/2019",
-            transferId: ""
-         },
-         {
-            transactionId: "69",
-            accountId: accountNumber,
-            actingParty: "Nerd's vending, llc",
-            credit: "",
-            debit: "2.50",
-            transactionDate: "10/11/2019",
-            transferId: ""
-         }
-      ],
-      currentBalance: "425.00"
-   }
-}
-
 function postDeposit(accountNumber, amount) {
-   // TODO post deposit for amount
-   console.log(
-      "Posted Deposit for account: " + accountNumber
-       + " for amount: " + amount
-      );
+   //TODO validate amount
+
+   var url = new URL(window.location.href);
+   var userParam = url.searchParams.get("user");
+   var xh = new XMLHttpRequest;
+   var pStr = "http://localhost:1235/TheBank/deposit?";
+   pStr += "username=" + userParam
+         + "&accountid=" + accountNumber
+         + "&amount=" + amount;
+
+   console.log(pStr);
+
+   xh.open('POST',pStr);
+   xh.onload = function(){
+      if ( this.readyState == 4 && this.status == 200 ) {
+         console.log("deposit response");
+      } else if (this.readyState == 4 && this.status == 404){
+         //console.warn("b-guh?");
+         return null;
+      }
+   };
+   xh.send();
 }
 
 function postWithdrawal(accountNumber, amount) {
