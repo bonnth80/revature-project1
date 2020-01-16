@@ -1,4 +1,5 @@
 console.log("user.js connected: 2");
+
 /*
   var xh = new XMLHttpRequest;
    var pokeString = document.getElementById("inpPokeText").value;
@@ -31,6 +32,9 @@ btnSignout.addEventListener("click", () => {
 
    window.location.href = "http://localhost:1235/TheBank/index.html";
 })
+
+// Welcome title
+var txtWelcomeName = document.getElementById("txtWelcomeName");
 
 // ************* Transfers **************************
 var scTransfers = document.getElementById("scTransfers");
@@ -133,7 +137,7 @@ function hideTransfers() {
 // ************* Accounts **************************
 var scAccounts = document.getElementById("scAccounts");
 
-function populateAccounts() {
+function populateUserFrontEnd() {
 	   var url = new URL(window.location.href);
 	   var userParam = url.searchParams.get("user");
 	   var xh = new XMLHttpRequest;
@@ -144,8 +148,8 @@ function populateAccounts() {
 	   xh.onload = function(){
 	      if ( this.readyState == 4 && this.status == 200 ) {
 	      var accounts = JSON.parse(this.responseText);
-         console.log(accounts);
          transferCount = Number.parseInt(accounts[0]);
+         txtWelcomeName.innerHTML = accounts[2];
          dTransferCount.innerHTML = transferCount;
 
 	      var accountsTable = `<h4>Accounts</h4>
@@ -180,8 +184,7 @@ function populateAccounts() {
 	   xh.send();
 }
 
-populateAccounts();
-
+populateUserFrontEnd();
 
 // ************* Account Details **************************
 var snAccountDetails = document.getElementById("snAccountDetails");
