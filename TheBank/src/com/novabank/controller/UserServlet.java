@@ -27,12 +27,9 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		
+		PrintWriter out = response.getWriter();		
 		Gson gson = new Gson();
-		//System.out.println(request.getSession().getAttribute("user"));
 		User user = (User)request.getSession().getAttribute("user");
 		try {
 			List<Account> accounts = new AccountBoImp().getAccountsByUserId(user.getUserId());
@@ -41,7 +38,6 @@ public class UserServlet extends HttpServlet {
 			resData.add(new Integer(transferCount));
 			resData.add(accounts);
 			String json = gson.toJson(resData);
-			System.out.println(json);
 			out.print(gson.toJson(resData));
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block

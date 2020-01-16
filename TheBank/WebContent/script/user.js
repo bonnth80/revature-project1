@@ -49,6 +49,23 @@ function showTransfers() {
 
    let transfers = getTransfers().transfers;
 
+   var xh = new XMLHttpRequest;
+   var pStr = "http://localhost:1235/TheBank/transfers?";
+   pStr += "username=" + userParam;
+
+   xh.open('GET',getStr);
+
+   xh.onload = function(){
+      if ( this.readyState == 4 && this.status == 200 ) {
+         let resText = this.responseText;
+         let res = JSON.parse(resText);
+         pokeContent.innerHTML = stringify(res);
+      } else if (this.readyState == 4 && this.status == 404){
+            console.warn('response from transfers returned 404');
+      }
+   };
+   xh.send();
+
    var transferTable = `<h4>Incoming Transfers</h4>
    <table class="table">
       <thead>
@@ -91,46 +108,6 @@ function hideTransfers() {
 
 function getTransfers() {
    // TODO: replace temp stub getTransfers
-   return {
-      transfers: [
-         {
-            transferId: "33",
-            amount: "400.0",
-            source: "4",
-            destination: "1",
-            status: "0",
-            requestDate: "10/01/2019",
-            responseDate: "",
-         },
-         {
-            transferId: "44",
-            amount: "242.0",
-            source: "7",
-            destination: "1",
-            status: "0",
-            requestDate: "10/02/2019",
-            responseDate: "",
-         },
-         {
-            transferId: "77",
-            amount: "121.12",
-            source: "4",
-            destination: "1",
-            status: "0",
-            requestDate: "10/03/2019",
-            responseDate: "",
-         },
-         {
-            transferId: "11",
-            amount: "1050.76",
-            source: "6",
-            destination: "1",
-            status: "0",
-            requestDate: "10/11/2019",
-            responseDate: "",
-         },
-      ]
-   };
 }
 
 function approveTransfer(tid) {
