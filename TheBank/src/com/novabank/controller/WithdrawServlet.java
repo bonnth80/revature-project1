@@ -17,16 +17,16 @@ import com.novabank.to.User;
 import com.novabank.transactionBO.TransactionBoImp;
 
 /**
- * Servlet implementation class DepositServlet
+ * Servlet implementation class WithdrawServlet
  */
-@WebServlet("/deposit")
-public class DepositServlet extends HttpServlet {
+@WebServlet("/withdraw")
+public class WithdrawServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DepositServlet() {
+    public WithdrawServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,12 +48,12 @@ public class DepositServlet extends HttpServlet {
 			Transaction transaction = new Transaction(newTransactionId,
 					accountId,
 					(user.getFirstName() + " " + user.getLastName()).toUpperCase(),
-					amount,
 					0,
+					amount,
 					new Date()
 					);
 			tbo.addTransaction(transaction);
-			//System.out.println("Deposit successful");
+			System.out.println("Withdraw successful");
 			
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block

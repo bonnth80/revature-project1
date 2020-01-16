@@ -233,7 +233,7 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
          </div>
          <div class="input-group mb-3">
             <div class="input-group-prepend">
-            <button onclick="postDeposit(currentAccount, withdrawAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
+            <button onclick="postWithdrawal(currentAccount, withdrawAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
             <span class="input-group-text">$</span>
             </div>
             <input type="text" oninput="setWithdrawAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
@@ -312,22 +312,36 @@ function postDeposit(accountNumber, amount) {
 
    xh.open('POST',pStr);
    xh.onload = function(){
-      if ( this.readyState == 4 && this.status == 200 ) {
-         console.log("deposit response");
-      } else if (this.readyState == 4 && this.status == 404){
-         //console.warn("b-guh?");
+      if (this.readyState == 4 && this.status == 404){
          return null;
       }
    };
    xh.send();
 }
 
-function postWithdrawal(accountNumber, amount) {
+function postWithdrawal(accountNumber, amount, bal) {
    // TODO post withdrawal for amount
-   console.log(
-      "Posted Withdrawal for account: " + accountNumber
-      + " for amount: " + amount
-      );
+   if (amount > bal) {
+      alert("Withdrawal amount cannot exceed your current balance.");
+   } else {
+      var url = new URL(window.location.href);
+      var userParam = url.searchParams.get("user");
+      var xh = new XMLHttpRequest;
+      var pStr = "http://localhost:1235/TheBank/withdraw?";
+      pStr += "username=" + userParam
+            + "&accountid=" + accountNumber
+            + "&amount=" + amount;
+
+      console.log(pStr);
+
+      xh.open('POST',pStr);
+      xh.onload = function(){
+         if (this.readyState == 4 && this.status == 404){
+            return null;
+         }
+      };
+      xh.send();
+   }
 }
 
 function postTransfer(sourceAccount, destinationAccount, amount) {
