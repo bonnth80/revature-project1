@@ -38,7 +38,6 @@ public class UserServlet extends HttpServlet {
 			resData.add(new Integer(transferCount));
 			resData.add(accounts);
 			resData.add(user.getFirstName());
-			String json = gson.toJson(resData);
 			out.print(gson.toJson(resData));
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block

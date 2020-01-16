@@ -2,6 +2,7 @@ package com.novabank.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -53,7 +54,6 @@ public class TransferServlet extends HttpServlet {
         response.setContentType("application/jason");        
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
-        User user = (User)request.getSession().getAttribute("user");
 		try {
 			TransferBoImp transferBo = new TransferBoImp();
 			int transferid = Integer.parseInt(request.getParameter("transferid"));
@@ -74,6 +74,33 @@ public class TransferServlet extends HttpServlet {
 			}
 			
 		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
+		int accountSource = Integer.parseInt(request.getParameter("source"));
+		int accountDestination = Integer.parseInt(request.getParameter("dest"));
+		float amount = Float.parseFloat(request.getParameter("amount"));
+		TransferBoImp tbo = new TransferBoImp();
+		
+		try {
+			int newTransferId = tbo.getMaxTransferId() + 1;
+			Transfer transfer = new Transfer(
+					newTransferId,
+					amount,
+					accountSource,
+					accountDestination,
+					0,
+					new Date(),
+					null
+					);
+			tbo.addNewTransfer(transfer);
+			System.out.println("Transfer posted.");
+			
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -220,7 +220,6 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
          currentAccount = accountNumber;
 
          transactionList = sortTL(transactionList);
-         console.log(transactionList);
 
          let accountDetailsHeader = `<h4 class="nav-item">Account details for: ${accountNumber}</h4>
          <nav class="my-2">
@@ -261,7 +260,6 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
             </thead>
             <tbody>`;
 
-            console.log(transactionList);
 
          let accountDetailsTable = "";
          transactionList.forEach((element) => {
@@ -319,9 +317,8 @@ function postDeposit(accountNumber, amount) {
    xh.send();
 }
 
-function postWithdrawal(accountNumber, amount, bal) {
-   // TODO post withdrawal for amount
-   if (amount > bal) {
+function postWithdrawal(accountNumber, amount, endingBalance) {
+   if (amount > endingBalance) {
       alert("Withdrawal amount cannot exceed your current balance.");
    } else {
       var url = new URL(window.location.href);
@@ -344,13 +341,29 @@ function postWithdrawal(accountNumber, amount, bal) {
    }
 }
 
-function postTransfer(sourceAccount, destinationAccount, amount) {
-   // TODO post transfer of funds
-   console.log(
-      "Posted transfer from account: " + sourceAccount +
-      " to account: " + destinationAccount +
-      " for amount: " + amount
-      );
+function postTransfer(currentAccount, transferDestination, transferAmount, endingBalance) {
+   if (transferAmount > endingBalance) {
+      alert("Transfer amount cannot exceed your current balance.");
+   } else {
+      var url = new URL(window.location.href);
+      var userParam = url.searchParams.get("user");
+      var xh = new XMLHttpRequest;
+      var pStr = "http://localhost:1235/TheBank/transfers?";
+      pStr += "username=" + userParam
+            + "&source=" + currentAccount
+            + "&dest=" + transferDestination
+            + "&amount=" + transferAmount;
+
+      console.log(pStr);
+
+      xh.open('POST',pStr);
+      xh.onload = function(){
+         if (this.readyState == 4 && this.status == 404){
+            return null;
+         }
+      };
+      xh.send();
+   }
 }
 
 function setWithdrawAmount(value) {

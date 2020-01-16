@@ -1,7 +1,6 @@
 package com.novabank.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.novabank.exception.BusinessException;
 import com.novabank.to.Transaction;
 import com.novabank.to.User;
@@ -36,8 +34,6 @@ public class DepositServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();		
-		Gson gson = new Gson();
 		User user = (User)request.getSession().getAttribute("user");
 		int accountId = Integer.parseInt(request.getParameter("accountid"));
 		float amount = Float.parseFloat(request.getParameter("amount"));
@@ -53,7 +49,7 @@ public class DepositServlet extends HttpServlet {
 					new Date()
 					);
 			tbo.addTransaction(transaction);
-			//System.out.println("Deposit successful");
+//			System.out.println("Transfer post successful");
 			
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import com.novabank.exception.BusinessException;
 import com.novabank.to.User;
-import com.novabank.transferBO.TransferBoImp;
 import com.novabank.userBO.UserBoImp;
 
 /**

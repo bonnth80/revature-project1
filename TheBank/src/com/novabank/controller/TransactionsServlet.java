@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.novabank.exception.BusinessException;
 import com.novabank.to.Transaction;
-import com.novabank.to.User;
 import com.novabank.transactionBO.TransactionBoImp;
 
 /**
@@ -27,7 +26,6 @@ public class TransactionsServlet extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();		
 		Gson gson = new Gson();
-		User user = (User)request.getSession().getAttribute("user");
 		
 		int accountNumber = Integer.parseInt(request.getParameter("accountnumber"));
 		try {
