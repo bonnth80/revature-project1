@@ -21,12 +21,11 @@ console.log("user.js connected: 2");
    xh.send();
 */
 
-// SIgn out button
+// Sign out button
 var btnSignout = document.getElementById("btnSignout");
 
 btnSignout.addEventListener("click", () => {
    var xh = new XMLHttpRequest;
-
    xh.open("GET", "http://localhost:1235/TheBank/signout");
    xh.send();
 
@@ -151,9 +150,9 @@ function populateUserFrontEnd() {
          transferCount = Number.parseInt(accounts[0]);
          txtWelcomeName.innerHTML = accounts[2];
          dTransferCount.innerHTML = transferCount;
-
+         console.log("new acounts pop3");
 	      var accountsTable = `<h4>Accounts</h4>
-	    	   <a href="apply.html" class="m-2 ml-auto btn btn-info">Apply For a New Account</a>
+            <button id="btnApply" type="button" class="m-2 ml-auto btn btn-info">Apply For a New Account</button>
 	    	   <table class="table">
 	    	      <thead>
 	    	         <tr>
@@ -175,7 +174,15 @@ function populateUserFrontEnd() {
 
 	    	   accountsTable += `</tbody></table></div>`;
 
-	    	   scAccounts.innerHTML = accountsTable;
+            scAccounts.innerHTML = accountsTable;
+
+            document.getElementById("btnApply").addEventListener("click", () => {
+               console.log("wtdd");
+               var pStr = "http://localhost:1235/TheBank/apply.html?user="
+                  + userParam;
+               window.location.href = pStr;
+            })
+
 	      } else if (this.readyState == 4 && this.status == 404){
 	         //console.warn("b-guh?");
 	         return null;
