@@ -21,9 +21,9 @@ public class TransactionBoImp implements TransactionBO {
 	}
 
 	@Override
-	public List<Transaction> getTransactionsByAccountId(int accountId) {
+	public List<Transaction> getTransactionsByAccountId(int accountId) throws BusinessException {
 		// TODO Auto-generated method stub
-		return null;
+		return new TransactionDaoImp().getTransactionsByAccountId(accountId);
 	}
 
 	@Override

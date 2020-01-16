@@ -167,7 +167,7 @@ function populateUserFrontEnd() {
 	    	   accounts[1].forEach((element)=>{
 	    	      accountsTable +=
 	    	      '<tr>' +
-	    	      '<td><button onclick="displayAccountTransactionHistory(' + element.accountNumber + ')" type="button" class="btn btn-primary">Details</button></td>' +
+	    	      '<td><button onclick="displayAccountTransactionHistory(' + element.accountNumber + ',' + element.startingBalance + ')" type="button" class="btn btn-primary">Details</button></td>' +
 	    	      '<td>' + element.accountNumber + '</td>' +
 	    	      '<td>' + element.startingBalance + '</td>' +
 	    	      '</tr>'
@@ -194,80 +194,105 @@ var transferAmount;
 var transferDestination;
 var currentAccount;
 
-function displayAccountTransactionHistory(accountNumber) {
+function displayAccountTransactionHistory(accountNumber, startingBalance) {
    snAccountDetails.style.display="block";
 
-   let transactionObject = getTransactionHistory(accountNumber);
-   let transactionList = transactionObject.transactions;
-   let balance = Number.parseFloat(transactionObject.currentBalance);
-   let credit;
-   let debit;
-   currentAccount = accountNumber;
+   var url = new URL(window.location.href);
+   var userParam = url.searchParams.get("user");
+   var xh = new XMLHttpRequest;
+   var pStr = "http://localhost:1235/TheBank/transactions?";
+   pStr += "username=" + userParam
+         + "&accountnumber=" + accountNumber;
 
-   transactionList = sortTL(transactionList);
+   xh.open('GET',pStr);
+   xh.onload = function(){
+      if ( this.readyState == 4 && this.status == 200 ) {
+         let resText = this.responseText;
+         let transactionList = JSON.parse(resText);
 
-   let accountDetailsTable = `<h4 class="nav-item">Account details for: ${accountNumber}</h4>
-   <nav class="my-2">
-   <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button onclick="postDeposit(currentAccount, depositAmount)" class="btn btn-primary" type="button" id="button-addon1">Deposit</button>
-        <span class="input-group-text">$</span>
-      </div>
-      <input type="text" oninput="setDepositAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button onclick="postDeposit(currentAccount, withdrawAmount)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
-        <span class="input-group-text">$</span>
-      </div>
-      <input type="text" oninput="setWithdrawAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-         <button onclick="postTransfer(currentAccount, transferDestination, transferAmount)" class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
-         <span class="input-group-text text-info">Amount | Destination</span>
-         <span class="input-group-text">$</span>
-      </div>
-      <input type="text" oninput="setTransferAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
-      <input type="text" oninput="setTransferDestination(this.value)" class="form-control" placeholder="0" aria-label="Example text with button addon" aria-describedby="button-addon1">
-    </div>
-   </nav>
-   <h5>Transaction History</h5>
-   <table class="table">
-      <thead>
-         <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Acting Party</th>
-            <th scope="col">Credit</th>
-            <th scope="col">Debit</th>
-            <th scope="col">Balance</th>
-         </tr>
-      </thead>
-      <tbody>`;
+         // let transactionList = getTransactionHistory(accountNumber);
+         //console.log("transaction list: " + transactionList);
+         //let transactionList = transactionObject.transactions;
+         let balance = startingBalance;
+         let credit;
+         let debit;
+         currentAccount = accountNumber;
 
-   transactionList.forEach((element) => {
-      credit = Number.parseFloat(element.credit);
-      debit = Number.parseFloat(element.debit);
-      accountDetailsTable +=
-      '<tr>' +
-      '<td>' + element.transactionDate + '</td>' +
-      '<td>' + element.actingParty.toUpperCase() + '</td>' +
-      '<td style="color: green">' + (credit ? credit.toFixed(2) : '') + '</td>' +
-      '<td style="color: red">' + (debit ? debit.toFixed(2) : '') + '</td>' +
-      '<td>' + balance.toFixed(2) + '</td>' +
-      '</tr>';
+         transactionList = sortTL(transactionList);
+         console.log(transactionList);
 
-      // odd though this may seem since we're going in reverse date order
-      // we must calculate balance backwards
-      if (credit) {
-         balance -= credit;
-      } else if (debit) {
-         balance += debit;
+         let accountDetailsHeader = `<h4 class="nav-item">Account details for: ${accountNumber}</h4>
+         <nav class="my-2">
+         <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <button onclick="postDeposit(currentAccount, depositAmount)" class="btn btn-primary" type="button" id="button-addon1">Deposit</button>
+            <span class="input-group-text">$</span>
+            </div>
+            <input type="text" oninput="setDepositAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+         </div>
+         <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <button onclick="postDeposit(currentAccount, withdrawAmount)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
+            <span class="input-group-text">$</span>
+            </div>
+            <input type="text" oninput="setWithdrawAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+         </div>
+         <div class="input-group mb-3">
+            <div class="input-group-prepend">
+               <button onclick="postTransfer(currentAccount, transferDestination, transferAmount)" class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
+               <span class="input-group-text text-info">Amount | Destination</span>
+               <span class="input-group-text">$</span>
+            </div>
+            <input type="text" oninput="setTransferAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <input type="text" oninput="setTransferDestination(this.value)" class="form-control" placeholder="0" aria-label="Example text with button addon" aria-describedby="button-addon1">
+         </div>
+         </nav>
+         <h5>Transaction History</h5>
+         <table class="table">
+            <thead>
+               <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Acting Party</th>
+                  <th scope="col">Credit</th>
+                  <th scope="col">Debit</th>
+                  <th scope="col">Balance</th>
+               </tr>
+            </thead>
+            <tbody>`;
+
+            console.log(transactionList);
+
+         let accountDetailsTable = "";
+         transactionList.forEach((element) => {
+            credit = Number.parseFloat(element.credit);
+            debit = Number.parseFloat(element.debit);
+
+            if (credit) {
+               balance += credit;
+            } else if (debit) {
+               balance -= debit;
+            }
+
+            accountDetailsTable =
+            '<tr>' +
+            '<td>' + element.transactionDate + '</td>' +
+            '<td>' + element.actingParty.toUpperCase() + '</td>' +
+            '<td style="color: green">' + (credit ? credit.toFixed(2) : '') + '</td>' +
+            '<td style="color: red">' + (debit ? debit.toFixed(2) : '') + '</td>' +
+            '<td>' + balance.toFixed(2) + '</td>' +
+            '</tr>' + accountDetailsTable;
+
+         })
+
+         snAccountDetails.innerHTML = accountDetailsHeader + accountDetailsTable;
+
+      } else if (this.readyState == 4 && this.status == 404){
+            console.warn('response from POST transfers returned 404');
       }
-   })
+   }
+   xh.send();
 
 
-   snAccountDetails.innerHTML = accountDetailsTable;
 }
 
 function getTransactionHistory(accountNumber) {
@@ -372,7 +397,7 @@ function sortTL(tl) {
    while (swapFlag) {
       swapFlag = false;
       for (let i = 0; i < newTl.length - 1; i++) {
-         if (new Date(newTl[i].transactionDate) < new Date(newTl[i+1].transactionDate)) {
+         if (new Date(newTl[i].transactionDate) > new Date(newTl[i+1].transactionDate)) {
             let temp = newTl[i];
             newTl[i] = newTl[i+1];
             newTl[i+1] = temp;

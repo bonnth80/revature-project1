@@ -10,7 +10,7 @@ public interface TransactionBO {
 	Transaction getTransactionById(int id);
 	int getMaxTransactionId() throws BusinessException;
 	List<Transaction> getAllTransactions() throws BusinessException;
-	List<Transaction> getTransactionsByAccountId(int accountId);
+	List<Transaction> getTransactionsByAccountId(int accountId) throws BusinessException;
 	List<Transaction> getTransactionsByActingParty(String actingParty);
 	List<Transaction> getTransactionByDate(Date date);
 	Transaction getTransactionByTransferId(int id);

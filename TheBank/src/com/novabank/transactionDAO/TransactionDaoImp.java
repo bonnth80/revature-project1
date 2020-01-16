@@ -13,6 +13,7 @@ import java.util.List;
 import com.novabank.dbutil.OracleConnection;
 import com.novabank.exception.BusinessException;
 import com.novabank.to.Transaction;
+import com.novabank.to.Transfer;
 
 public class TransactionDaoImp implements TransactionDAO {
 
@@ -63,9 +64,31 @@ public class TransactionDaoImp implements TransactionDAO {
 	}
 
 	@Override
-	public List<Transaction> getTransactionsByAccountId(int accountId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Transaction> getTransactionsByAccountId(int accountId) throws BusinessException {
+		List<Transaction> transactions = new ArrayList<>();
+		try (Connection connection = OracleConnection.getConnection()) {
+			String sql =  "SELECT transaction_id, account_number, acting_party, credit, debit, transaction_date, transfer_id "
+					+ "FROM transaction_history "
+					+ "WHERE account_number = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, accountId);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				transactions.add(new Transaction(
+						rs.getInt(1),
+						rs.getInt(2),
+						rs.getString(3),
+						rs.getFloat(4),
+						rs.getFloat(5),
+						rs.getDate(6),
+						rs.getInt(7)
+						));
+			}
+			
+			return transactions;
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new BusinessException("Internal error: " + e);
+		}
 	}
 
 	@Override

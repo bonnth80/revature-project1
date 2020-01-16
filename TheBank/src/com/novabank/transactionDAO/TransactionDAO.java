@@ -8,7 +8,7 @@ import com.novabank.to.Transaction;
 
 public interface TransactionDAO {
 	Transaction getTransactionById(int id);
-	List<Transaction> getTransactionsByAccountId(int accountId);
+	List<Transaction> getTransactionsByAccountId(int accountId) throws BusinessException;
 	List<Transaction> getTransactionsByActingParty(String actingParty);
 	List<Transaction> getTransactionByDate(Date date);
 	Transaction getTransactionByTransferId(int id);
