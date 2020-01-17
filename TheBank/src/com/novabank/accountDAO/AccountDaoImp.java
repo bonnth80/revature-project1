@@ -279,4 +279,41 @@ public class AccountDaoImp implements AccountDAO {
 		}
 	}
 
+	@Override
+	public List<Account> getActiveAccountsByUserId(int userId) throws BusinessException {
+		List<Account> accounts = new ArrayList<>();
+		
+		try (Connection connection = OracleConnection.getConnection()) {
+			String sql =  "SELECT v, user_id,creation_date,status,starting_balance, NVL(starting_balance + SUM(credit) - SUM(debit), starting_balance) "
+					+ "FROM ( "
+					+ "		SELECT a.account_number AS v, a.user_id AS user_id, a.creation_date AS creation_date,"
+					+ "		a.status AS status,a.starting_balance AS starting_balance, th.credit AS credit, th.debit AS debit "
+					+ "		FROM account a "
+					+ "		LEFT OUTER JOIN transaction_history th "
+					+ "		ON th.account_number = a.account_number "
+					+ ") "
+					+ "WHERE user_id = ? AND status = 1 "
+					+ "GROUP BY v, user_id, creation_date, status, starting_balance "
+					+ "ORDER BY v";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				accounts.add(new Account(
+						rs.getInt(1),
+						rs.getInt(2),
+						rs.getDate(3),
+						rs.getInt(4),
+						rs.getFloat(5),
+						rs.getFloat(6)
+						));
+			}
+			
+			return accounts;
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new BusinessException("Internal error: " + e);
+		}
+	}
+
 }

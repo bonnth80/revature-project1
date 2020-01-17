@@ -32,7 +32,7 @@ public class UserServlet extends HttpServlet {
 		Gson gson = new Gson();
 		User user = (User)request.getSession().getAttribute("user");
 		try {
-			List<Account> accounts = new AccountBoImp().getAccountsByUserId(user.getUserId());
+			List<Account> accounts = new AccountBoImp().getActiveAccountsByUserId(user.getUserId());
 			int transferCount = new TransferBoImp().getTransferCountByUserId(user.getUserId());
 			List<Object> resData = new ArrayList<>();
 			resData.add(new Integer(transferCount));

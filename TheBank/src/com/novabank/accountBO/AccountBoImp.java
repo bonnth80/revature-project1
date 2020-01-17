@@ -76,5 +76,11 @@ public class AccountBoImp implements AccountBO {
 		return new AccountDaoImp().getAccountsByUserName(firstName, lastName);
 	}
 
+	@Override
+	public List<Account> getActiveAccountsByUserId(int userId) throws BusinessException {
+		// TODO Auto-generated method stub
+		return new AccountDaoImp().getActiveAccountsByUserId(userId);
+	}
+
 
 }

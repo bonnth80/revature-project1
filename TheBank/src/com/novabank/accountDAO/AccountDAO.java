@@ -15,7 +15,7 @@ public interface AccountDAO {
 	int getPendingApprovalCount() throws BusinessException;
 	List<Account> getAccountsByCreationDate(Date date);
 	List<Account> getAccountsByStatus(int status) throws BusinessException;
-	
+	List<Account> getActiveAccountsByUserId(int userId) throws BusinessException;	
 	
 	boolean addNewAccount(Account account) throws BusinessException;
 	boolean updateAccountStatus(Account account, int status) throws BusinessException;
