@@ -73,5 +73,17 @@ public class Account {
 	public String getUserLastName() throws BusinessException {
 		return new AccountBoImp().getUserLastName(this);
 	}
-	
+	@Override
+	public boolean equals(Object object) {
+		Account account = (Account)object;
+		if((this.accountNumber == account.accountNumber) 
+			&& (this.userId == account.userId)
+			&& (this.status == account.status)
+			&& (this.startingBalance == account.startingBalance)
+			) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
