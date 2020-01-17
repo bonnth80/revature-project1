@@ -19,7 +19,16 @@ btnLogin.addEventListener("click", ()=>{
 
    xhr.onload = function(){
       if ( this.readyState == 4 && this.status == 200 ) {
-         window.location.href = 'user.html?user=' + u;
+         var res = JSON.parse(this.responseText);
+         if (res.code == 1) {
+            console.log(res.message);
+            window.location.href = 'user.html?user=' + u;
+         } else if(res.code == 0) {
+            txtUsername.value = "";
+            txtPassword.value = "";
+            alert(res.message);
+         }
+
       }
    };
    xhr.send();
