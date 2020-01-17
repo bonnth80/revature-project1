@@ -8,7 +8,7 @@ var inpPPhone = document.getElementById("inpPPhone");
 var inpMPhone = document.getElementById("inpMPhone");
 var inpSSN = document.getElementById("inpSSN");
 var inpStreetAddress1 = document.getElementById("inpStreetAddress1");
-var inpStreetAddress2 = document.getElementById("inpStreetAddress2");
+var inpCity = document.getElementById("inpCity");
 var inpState = document.getElementById("inpState");
 var inpZip = document.getElementById("inpZip");
 
@@ -22,11 +22,11 @@ var lblPPhone = document.getElementById("lblPPhone");
 var lblMPhone = document.getElementById("lblMPhone");
 var lblSSN = document.getElementById("lblSSN");
 var lblStreetAddress1 = document.getElementById("lblStreetAddress1");
-var lblStreetAdress2 = document.getElementById("lblStreetAdress2");
+var lblCity = document.getElementById("lblCity");
 var lblState = document.getElementById("lblState");
 var lblZip = document.getElementById("lblZip");
 
-const NUM_VALIDATABLE = 11;
+const NUM_VALIDATABLE = 12;
 var numValidated = 0;
 
 var fNameValidated = false;
@@ -38,6 +38,7 @@ var confirmValidated = false;
 var phoneValidated = false;
 var ssnValidated = false;
 var streetaddressValidated = false;
+var cityValidated = false;
 var stateValidated = false;
 var zipValidated = false;
 
@@ -51,7 +52,7 @@ lblPPhone.style.color="red";
 //lblMPhone.style.color="red";
 lblSSN.style.color="red";
 lblStreetAddress1.style.color="red";
-//lblStreetAdress2.style.color="red";
+lblCity.style.color="red";
 lblState.style.color="red";
 lblZip.style.color="red";
 
@@ -66,6 +67,7 @@ var checkFormValidation = function() {
       phoneValidated +
       ssnValidated +
       streetaddressValidated +
+      cityValidated +
       stateValidated +
       zipValidated;
 
@@ -75,6 +77,39 @@ var checkFormValidation = function() {
       disableSubmitButton();
    }
 }
+
+btnSubmit.addEventListener("click", ()=>{
+   var pStr = "http://localhost:1235/TheBank/signup";
+   var paraStr = pStr
+			+ "?firstName=" + inpFName.value
+			+ "&lastName=" + inpLName.value
+			+ "&archetype=" + 0
+			+ "&ssn=" + inpSSN.value
+			+ "&homePhone=" + inpPPhone.value
+			+ "&mobilePhone=" + inpMPhone.value
+			+ "&email=" + inpEmail.value
+			+ "&streetAddress=" + inpStreetAddress1.value
+			+ "&city=" + inpCity.value
+			+ "&state=" + inpState.value
+			+ "&country=" + "USA"
+			+ "&zip=" + inpZip.value
+			+ "&userName=" + inpUsername.value
+			+ "&password=" + inpPassword.value;
+
+console.log(paraStr);
+
+
+   var xh = new XMLHttpRequest;
+   xh.open("POST", paraStr);
+   xh.onload = function() {
+      if (this.readyState == 4 && this.status == 400) {
+         console.log("error")
+      }
+   }
+
+   xh.send();
+
+})
 
 var enableSubmitButton = function() {
    var btnSubmit = document.getElementById("btnSubmit");
@@ -257,7 +292,18 @@ inpStreetAddress1.addEventListener("input",() => {
    checkFormValidation();
 });
 
-inpStreetAddress2.addEventListener("input",() => {
+inpCity.addEventListener("input",() => {
+   if (inpCity.value === "") {
+      lblCity.style.color = "red";
+      cityValidated = false;
+   } else {
+      lblCity.style.color = "black";
+      cityValidated = true;
+   }
+   checkFormValidation();
+});
+
+inpCity.addEventListener("input",() => {
 
    checkFormValidation();
 });

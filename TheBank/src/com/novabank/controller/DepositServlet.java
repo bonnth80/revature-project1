@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.novabank.exception.BusinessException;
 import com.novabank.to.Transaction;
 import com.novabank.to.User;
@@ -20,25 +22,16 @@ import com.novabank.transactionBO.TransactionBoImp;
 @WebServlet("/deposit")
 public class DepositServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DepositServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static Logger log = Logger.getLogger(DepositServlet.class);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		log.info("DepositServlet (doPost)");
 		response.setContentType("application/json");
 		User user = (User)request.getSession().getAttribute("user");
 		int accountId = Integer.parseInt(request.getParameter("accountid"));
 		float amount = Float.parseFloat(request.getParameter("amount"));
 		TransactionBoImp tbo = new TransactionBoImp();
-		
+		log.info("DepositServlet (doPost): accountid=" + accountId + " amount=" + amount);
 		try {
 			int newTransactionId = tbo.getMaxTransactionId() + 1;
 			Transaction transaction = new Transaction(newTransactionId,
@@ -48,12 +41,12 @@ public class DepositServlet extends HttpServlet {
 					0,
 					new Date()
 					);
+
+			log.info("DepositServlet (doPost): transaction=" + transaction);
 			tbo.addTransaction(transaction);
-//			System.out.println("Transfer post successful");
 			
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.warn("DepositServlet (doPost): err=" + e);
 		}
 	}
 
