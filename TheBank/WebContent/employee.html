@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>The Bank</title>
+
+   <!-- Bootstrap css -->
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous">
+
+   <!-- font awesome css -->
+   <link rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous">
+
+    <!-- Google fonts: Audiowide -->
+    <link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
+
+   <!-- local css -->
+   <link rel="stylesheet" href="style/employee.css">
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="portal.html">
+      <svg
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:cc="http://creativecommons.org/ns#"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns="http://www.w3.org/2000/svg"
+      id="svg8"
+      version="1.1"
+      viewBox="0 0 96.157303 93.633621"
+      height="48px"
+      width="48px">
+         <defs
+            id="defs2" />
+         <metadata
+            id="metadata5">
+         </metadata>
+         <g
+            transform="translate(-52.20613,-37.664796)"
+            id="layer1">
+            <path
+            id="path3713-6"
+            d="M 128.78671,94.651413 A 58.636603,37.869163 63.234114 0 0 128.70279,92.236019 69.549721,45.117747 50.839398 0 1 75.378755,108.48362 69.549721,45.117747 50.839398 0 1 52.20613,93.51116 58.636603,37.869163 63.234114 0 0 86.192285,128.12796 58.636603,37.869163 63.234114 0 0 128.78671,94.651413 Z"
+            style="fill:#00aad4;stroke-width:0.24077772" />
+            <path
+            id="path3713-6-8"
+            d="m 77.80634,99.928743 a 58.636604,37.869164 9.5037713 0 0 1.997042,1.361247 45.117747,69.549722 87.109056 0 1 18.446286,-52.60392 45.117747,69.549722 87.109056 0 1 25.780012,-9.825236 58.636604,37.869164 9.5037713 0 0 -48.015245,6.922233 58.636604,37.869164 9.5037713 0 0 1.791905,54.145676 z"
+            style="stroke-width:0.24077772" />
+            <path
+            id="path3713-6-8-0"
+            d="M 99.734193,55.207577 A 37.869164,58.636604 37.643428 0 0 97.592005,56.326582 45.117747,69.549722 25.248713 0 1 135.2785,97.4017 45.117747,69.549722 25.248713 0 1 131.78397,124.76834 37.869164,58.636604 37.643428 0 0 148.325,79.163781 37.869164,58.636604 37.643428 0 0 99.734193,55.207577 Z"
+            style="fill:#000000;stroke-width:0.24077772" />
+         </g>
+      </svg>
+      </i><span id="logo">NovaBank</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+               <a class="nav-link" href="#">My Nova<span class="sr-only">(current)</span></a>
+            </li>
+         </ul>
+      </div>
+
+      <div class="my-2 my-lg-0">
+         <button id="btnSignout" class="btn btn-success my-2 my-sm-0" type="button">Sign out</button>
+       </div>
+   </nav>
+
+   <!-- body -->
+   <div class="container">
+      <!--
+      -1. View pending account applications. (" + new AccountBoImp().getPendingApprovalCount() + "
+      2. Retrieve customer account info
+      3. Retrieve transaction log
+      4. Register new user
+      5. Sign out
+      6. Exit application
+       -->
+
+       <!-- Welcome and User Info box -->
+
+      <div>
+         <h2 class="my-2 text-center">Welcome, <span id="txtWelcomeName"></span></h2>
+      </div>
+      <div class="border border-info rounded my-2 usection">
+         <h4>Accounts Pending Approval</h4>
+         You have <span id="dPendingAccounts">0</span> accounts pending approval<br>
+         <button id="btnViewPendingAccounts" type="button" class="btn btn-primary">View PendingAccounts</button>
+         <button id="btnHidePendingAccounts" type="button" class="btn btn-primary">Hide PendingAccounts</button>
+      </div>
+
+      <!-- Accounts pending Approval List -->
+      <div id="scPendingAccounts" class="border border-info rounded my-2 usection">
+
+      </div>
+
+      <!-- Accounts List -->
+      <div id="scAccounts" class="border border-info rounded my-2 usection">
+      <h4>Accounts</h4>
+
+      <h5>Search for account by: </h5>
+      <div class="input-group mb-3">
+         <div class="input-group-prepend">
+            <button id="btnSearchByAccountNumber" class="btn btn-primary" type="button">Account Number</button>
+            <span class="input-group-text">#</span>
+         </div>
+         <input id="inpSearchByAccountNumber" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      </div>
+      <!-- <div class="input-group mb-3">
+         <div class="input-group-prepend">
+            <button onclick="getAccountById(id)" class="btn btn-primary" type="button" id="button-addon1">Account Number</button>
+            <span class="input-group-text">$</span>
+         </div>
+         <input type="text" oninput="setId(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      </div> -->
+      <table class="table">
+         <thead>
+            <tr>
+            <th scope="col">Actions</th>
+            <th scope="col">Account Number</th>
+            <th scope="col">Balance</th>
+            </tr>
+         </thead>
+         <tbody id="tbAccounts">
+         </tbody>
+      </table>
+      </div>
+
+      <!-- Account Details -->
+
+      <div id="snAccountDetails" class="border border-info rounded my-2 usection">
+      </div>
+   </div>
+
+   <!-- scripts -->
+   <mysscriptsection>
+      <!-- JQuery scripts -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+         crossorigin="anonymous"></script>
+      <!-- Pooper scripts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+         crossorigin="anonymous"></script>
+      <!-- Bootstrap scripts -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+         crossorigin="anonymous"></script>
+      <script src="script/employee.js"></script>
+   </mysscriptsection>
+</body>
+</html>

@@ -15,26 +15,12 @@ import com.novabank.to.User;
 import com.novabank.userBO.UserBoImp;
 
 /**
- * Servlet implementation class SigninServlet
+ * Servlet implementation class PortalServlet
  */
-@WebServlet({ "/SigninServlet", "/customersignin" })
-public class SigninServlet extends HttpServlet {
+@WebServlet("/employeesignin")
+public class PortalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SigninServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		response.setContentType("application/json");
 		String uname = request.getParameter("username");
@@ -43,12 +29,12 @@ public class SigninServlet extends HttpServlet {
 		
 		try {
 			User user = new UserBoImp().getUserByCredentials(uname, pword);
-			if (user.getArchetype() == 1) {
+			if (user.getArchetype() == 0) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
 				out.print("{\"code\": 1, \"message\": \"Redirecting...\"}");
-			} else if (user.getArchetype() == 0) {
-				out.print("{\"code\": 0, \"message\": \"Wrong user type. Employees should log in at http://127.0.0.1:1235/TheBank/portal.html\"}");
+			} else if (user.getArchetype() == 1) {
+				out.print("{\"code\": 0, \"message\": \"Wrong user type. Customers should log in at http://127.0.0.1:1235/TheBank/index.html\"}");
 			}
 		} catch (BusinessException e) {
 			System.out.println("Error: " + e);

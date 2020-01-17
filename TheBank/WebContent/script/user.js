@@ -1,26 +1,5 @@
 console.log("user.js connected: 2");
 
-/*
-  var xh = new XMLHttpRequest;
-   var pokeString = document.getElementById("inpPokeText").value;
-   var getStr = "https://pokeapi.co/api/v2/pokemon/" + pokeString.toLowerCase();
-   //console.log(getStr);
-   xh.open('GET',getStr);
-   var pokeContent = document.getElementById("pokeContent");
-   xh.onload = function(){
-      if ( this.readyState == 4 && this.status == 200 ) {
-         let resText = this.responseText;
-         let res = JSON.parse(resText);
-         //console.log(res);
-         pokeContent.innerHTML = stringify(res);
-      } else if (this.readyState == 4 && this.status == 404){
-            pokeContent.innerHTML = "No such pokemon. Try entering \"Pikachu\"";
-
-      }
-   };
-   xh.send();
-*/
-
 // Sign out button
 var btnSignout = document.getElementById("btnSignout");
 
@@ -44,7 +23,6 @@ var transferCount = 0;
 btnViewTransfers.addEventListener("click", showTransfers);
 btnHideTransfers.addEventListener("click", hideTransfers);
 
-
 function showTransfers() {
    scTransfers.style.padding = "12px 12px";
    scTransfers.style.height = "200px";
@@ -54,6 +32,7 @@ function showTransfers() {
 
    var url = new URL(window.location.href);
    var userParam = url.searchParams.get("user");
+
    var xh = new XMLHttpRequest;
    var pStr = "http://localhost:1235/TheBank/transfers?";
    pStr += "username=" + userParam;
@@ -98,6 +77,7 @@ function showTransfers() {
             console.warn('response from GET transfers returned 404');
       }
    };
+
    xh.send();
 }
 
@@ -114,7 +94,7 @@ function updateTransferStatus(transferId, status) {
    xh.onload = function(){
       if ( this.readyState == 4 && this.status == 200 ) {
          let resText = this.responseText;
-         let transfers = JSON.parse(resText);
+         // let transfers = JSON.parse(resText);
          dTransferCount.innerHTML = --transferCount;
          showTransfers();
       } else if (this.readyState == 4 && this.status == 404){
@@ -150,7 +130,6 @@ function populateUserFrontEnd() {
          transferCount = Number.parseInt(accounts[0]);
          txtWelcomeName.innerHTML = accounts[2];
          dTransferCount.innerHTML = transferCount;
-         console.log("new acounts pop3");
 	      var accountsTable = `<h4>Accounts</h4>
             <button id="btnApply" type="button" class="m-2 ml-auto btn btn-info">Apply For a New Account</button>
 	    	   <table class="table">
@@ -218,9 +197,6 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
          let resText = this.responseText;
          let transactionList = JSON.parse(resText);
 
-         // let transactionList = getTransactionHistory(accountNumber);
-         //console.log("transaction list: " + transactionList);
-         //let transactionList = transactionObject.transactions;
          let balance = startingBalance;
          let credit;
          let debit;
@@ -230,29 +206,29 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
 
          let accountDetailsHeader = `<h4 class="nav-item">Account details for: ${accountNumber}</h4>
          <nav class="my-2">
-         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-            <button onclick="postDeposit(currentAccount, depositAmount)" class="btn btn-primary" type="button" id="button-addon1">Deposit</button>
-            <span class="input-group-text">$</span>
-            </div>
-            <input type="text" oninput="setDepositAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
-         </div>
-         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-            <button onclick="postWithdrawal(currentAccount, withdrawAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
-            <span class="input-group-text">$</span>
-            </div>
-            <input type="text" oninput="setWithdrawAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
-         </div>
-         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-               <button onclick="postTransfer(currentAccount, transferDestination, transferAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
-               <span class="input-group-text text-info">Amount | Destination</span>
+            <div class="input-group mb-3">
+               <div class="input-group-prepend">
+               <button onclick="postDeposit(currentAccount, depositAmount)" class="btn btn-primary" type="button" id="button-addon1">Deposit</button>
                <span class="input-group-text">$</span>
+               </div>
+               <input type="text" oninput="setDepositAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
             </div>
-            <input type="text" oninput="setTransferAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
-            <input type="text" oninput="setTransferDestination(this.value)" class="form-control" placeholder="0" aria-label="Example text with button addon" aria-describedby="button-addon1">
-         </div>
+            <div class="input-group mb-3">
+               <div class="input-group-prepend">
+               <button onclick="postWithdrawal(currentAccount, withdrawAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Withdraw</button>
+               <span class="input-group-text">$</span>
+               </div>
+               <input type="text" oninput="setWithdrawAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            </div>
+            <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                  <button onclick="postTransfer(currentAccount, transferDestination, transferAmount, endingBalance)" class="btn btn-primary" type="button" id="button-addon1">Transfer</button>
+                  <span class="input-group-text text-info">Amount | Destination</span>
+                  <span class="input-group-text">$</span>
+               </div>
+               <input type="text" oninput="setTransferAmount(this.value)" class="form-control" placeholder="0.00" aria-label="Example text with button addon" aria-describedby="button-addon1">
+               <input type="text" oninput="setTransferDestination(this.value)" class="form-control" placeholder="0" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            </div>
          </nav>
          <h5>Transaction History</h5>
          <table class="table">
@@ -291,15 +267,15 @@ function displayAccountTransactionHistory(accountNumber, startingBalance) {
          })
 
          endingBalance = balance;
-         snAccountDetails.innerHTML = accountDetailsHeader + accountDetailsTable;
+
+         var accountDetailsFooter = "</tbody></table>"
+         snAccountDetails.innerHTML = accountDetailsHeader + accountDetailsTable + accountDetailsFooter;
 
       } else if (this.readyState == 4 && this.status == 404){
             console.warn('response from POST transfers returned 404');
       }
    }
    xh.send();
-
-
 }
 
 function postDeposit(accountNumber, amount) {

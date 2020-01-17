@@ -1,0 +1,20 @@
+.usection {
+   padding: 12px;
+   transition-duration: 400ms;
+   /* transition-timing-function: linear; */
+   overflow: hidden;
+}
+
+#scPendingAccounts {
+   padding: 0px 12px;
+   height: 0px;
+   overflow-Y: hidden;
+}
+
+#btnHidePendingAccounts {
+   display: none;
+}
+
+#snAccountDetails {
+   display: none;
+}

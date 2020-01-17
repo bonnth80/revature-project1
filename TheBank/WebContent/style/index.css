@@ -22,6 +22,10 @@ h1 {
    /* background-color: #440000; */
 }
 
+#bg-banner-portal {
+   background-image: url('../media/images/virtual-background02.jpg');
+}
+
 .card-login {
    width: 18rem;
 }

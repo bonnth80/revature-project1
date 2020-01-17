@@ -36,7 +36,7 @@ public class TransferServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-        response.setContentType("application/jason");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         User user = (User)request.getSession().getAttribute("user");
@@ -51,7 +51,7 @@ public class TransferServlet extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("TransferServlet handling post request");
-        response.setContentType("application/jason");        
+        response.setContentType("application/json");        
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
 		try {

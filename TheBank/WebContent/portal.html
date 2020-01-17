@@ -66,34 +66,90 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Employee Tools
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">View Pending Applications</a>
-            <a class="dropdown-item" href="#">Customer Accounts</a>
-            <a class="dropdown-item" href="#">Register Users</a>
-            <a class="dropdown-item" href="#">Transactions Logs</a>
+  </nav>
+  <div id="bg-banner-portal" class="container-fluid bg-banner">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-6">
+        <div class="card-body card-img-overlay bg-transparent text-white">
+          <h5 class="card-title display-4">It's True What They Say...</h5>
+          <p class="card-text display-5">
+            ... Hard earned work is made from sweat, blood, and tears. But if you work hard enough we won't have to confiscate any of your bodyparts!
+          </p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card m-4 card-login">
+          <div class="card-body">
+            <h5 class="card-title">Welcome</h5>
+            <form class="form-inline my-2 my-lg-0">
+              <input id="txtUsername" class="form-control mr-sm-2 my-1" type="search" placeholder="username" aria-label="Search">
+              <input id="txtPassword" class="form-control mr-sm-2 my-1" type="password" placeholder="password" aria-label="Search">
+              <button id="btnLogin" type="button" class="btn btn-block btn-outline-success my-2 my-sm-0 my-1">Login</button>
+            </form>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a id="lnForgotPw" href="#" class="my-1">Forgot Password</a></li class="list-group-item">
+              <li class="list-group-item"><a href="signup.html" class="my-1">New user? Sign up here.</a></li>
+            </ul>
           </div>
-        </li>
-      </ul>
-      <div class="my-2 my-lg-0">
-        <button class="btn btn-success my-2 my-sm-0" type="submit">Sign out</button>
+        </div>
       </div>
     </div>
-  </nav>
+  </div>
 
-    <!-- body -->
-    <div class="container border rounded-lg">
+  <!-- body -->
+  <div class="container border rounded-lg">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
 
+        <div class="carousel-item active">
+          <div class="card">
+            <img src="media/images/life-photo-103127.jpeg" class="img-fluid d-block" alt="woman facing sunset">
+            <div class="card-body card-img-overlay col-4 border bg-transparent card-custom">
+              <h5 class="card-title display-3">Achieve financial freedom</h5>
+              <p class="card-text display-5">Keep your finances in check with our proprietary suite of tools. With our help, you can achieve your dreams.</p>
+            </div>
+          </div>
+        </div>
 
+        <div class="carousel-item">
+          <div class="card">
+            <img src="media/images/professionals.jpeg" class="img-fluid d-block" alt="professionals posing">
+            <div class="ml-auto card-body card-img-overlay col-5 border bg-transparent card-custom">
+              <h5 class="card-title display-4">The pinnacle of professionalism</h5>
+              <p class="card-text display-5">We employ and train only the most highly educated professionals so that you are receiving only the best quality service.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card">
+            <img src="media/images/technology2-photo-256219.jpeg" class="img-fluid d-block" alt="woman leaning on glass outside server closet">
+            <div class="card-body card-img-overlay col-5 border bg-transparent card-custom">
+              <h5 class="card-title display-4">State-of-the-art technology</h5>
+              <p class="card-text display-5">Our business is driven by the modern cutting-edge technology and professionals to drive them, so you can rest assured that your assets are safe and easy to maintain.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
+
+  </div>
+
 
 
    <!-- JQuery scripts -->
@@ -108,7 +164,9 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
-   <script src="script/script.js"></script>
+
+    <!-- custom scripts -->
+   <script src="script/portal.js"></script>
 </body>
 </html>
 
